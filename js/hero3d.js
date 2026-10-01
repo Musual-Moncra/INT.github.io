@@ -286,6 +286,9 @@ class Hero3D {
     }
 
     if (presetName === 'logo') {
+      // The emblem's visual center sits slightly left inside the original
+      // artwork crop, so apply a small optical correction within the HUD.
+      this.meshGroup.position.x = this.container.clientWidth <= 768 ? 0.13 : 0.22;
       const side = new THREE.MeshStandardMaterial({ color: 0x075735, metalness: 0.82, roughness: 0.24 });
       this.logoFaceMaterial = new THREE.MeshStandardMaterial({
         color: 0xffffff,
