@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Minimalist 3D Narrative Landing Page for INT",
   "scripts": {
-    "dev": "python3 -m http.server 3000",
+    "dev": "python3 -m http.server 8080",
     "serve": "npx serve ."
   },
   "keywords": [

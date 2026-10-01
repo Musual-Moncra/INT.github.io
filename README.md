@@ -41,9 +41,9 @@ Chỉ cần nhấp đúp vào file `index.html` hoặc mở bằng trình duyệ
 ### Cách 2: Dùng Python Web Server có sẵn
 Chạy lệnh sau trong thư mục dự án:
 ```bash
-python3 -m http.server 3000
+python3 -m http.server 8080
 ```
-Sau đó truy cập: [http://localhost:3000](http://localhost:3000)
+Sau đó truy cập: [http://localhost:8080](http://localhost:8080)
 
 ### Cách 3: Dùng Node.js / npx
 ```bash
