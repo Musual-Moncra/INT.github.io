@@ -15,7 +15,7 @@ class Hero3D {
     }
 
     this.container = this.canvas.parentElement;
-    this.currentPreset = 'knot'; // 'knot' | 'core' | 'poly'
+    this.currentPreset = 'logo';
     
     // Physics & Interaction variables
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -41,7 +41,8 @@ class Hero3D {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    this.camera.position.z = 6.2;
+    this.cameraDistance = width <= 768 ? 5 : 6.2;
+    this.camera.position.z = this.cameraDistance;
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -62,21 +63,21 @@ class Hero3D {
 
   createLights() {
     // Ambient light for base visibility
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xfff4d2, 0.75);
     this.scene.add(ambientLight);
 
     // Key directional light (cool white)
-    this.keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    this.keyLight = new THREE.DirectionalLight(0xfff0c1, 1.8);
     this.keyLight.position.set(5, 5, 6);
     this.scene.add(this.keyLight);
 
     // Cyan accent rim light
-    this.rimLightCyan = new THREE.PointLight(0x5eead4, 3.5, 15);
+    this.rimLightCyan = new THREE.PointLight(0x2b9b60, 3.5, 15);
     this.rimLightCyan.position.set(-5, -2, 3);
     this.scene.add(this.rimLightCyan);
 
     // Soft Purple accent fill light
-    this.rimLightPurple = new THREE.PointLight(0xc084fc, 3.0, 15);
+    this.rimLightPurple = new THREE.PointLight(0xe4aa37, 2.2, 15);
     this.rimLightPurple.position.set(4, -4, -2);
     this.scene.add(this.rimLightPurple);
   }
@@ -144,7 +145,70 @@ class Hero3D {
     this.mainGroup.add(this.ring2);
 
     // Load initial geometry
-    this.switchPreset('knot', false);
+    this.switchPreset('logo', false);
+  }
+
+  loadLogoTexture() {
+    const image = new Image();
+    image.onload = () => {
+      const size = 1024;
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = size;
+      const context = canvas.getContext('2d', { willReadFrequently: true });
+      const cropSize = Math.min(image.naturalWidth, image.naturalHeight);
+      const cropX = (image.naturalWidth - cropSize) / 2;
+      const cropY = (image.naturalHeight - cropSize) / 2;
+      context.translate(size / 2, size / 2);
+      context.rotate(-Math.PI / 2);
+      context.drawImage(image, cropX, cropY, cropSize, cropSize, -size / 2, -size / 2, size, size);
+      context.setTransform(1, 0, 0, 1, 0, 0);
+
+      // Remove only the white background connected to the image edges. White
+      // lettering and illustration details inside the badge remain visible.
+      const imageData = context.getImageData(0, 0, size, size);
+      const pixels = imageData.data;
+      const queue = new Int32Array(size * size);
+      let queueStart = 0;
+      let queueEnd = 0;
+      const enqueueBackgroundPixel = (pixelIndex) => {
+        const i = pixelIndex * 4;
+        const r = pixels[i];
+        const g = pixels[i + 1];
+        const b = pixels[i + 2];
+        const brightest = Math.max(r, g, b);
+        const darkest = Math.min(r, g, b);
+        if (pixels[i + 3] === 0 || darkest < 232 || brightest - darkest > 28) return;
+        pixels[i + 3] = 0;
+        queue[queueEnd++] = pixelIndex;
+      };
+
+      for (let x = 0; x < size; x++) {
+        enqueueBackgroundPixel(x);
+        enqueueBackgroundPixel((size - 1) * size + x);
+      }
+      for (let y = 1; y < size - 1; y++) {
+        enqueueBackgroundPixel(y * size);
+        enqueueBackgroundPixel(y * size + size - 1);
+      }
+
+      while (queueStart < queueEnd) {
+        const pixelIndex = queue[queueStart++];
+        const x = pixelIndex % size;
+        const y = (pixelIndex - x) / size;
+        if (x > 0) enqueueBackgroundPixel(pixelIndex - 1);
+        if (x < size - 1) enqueueBackgroundPixel(pixelIndex + 1);
+        if (y > 0) enqueueBackgroundPixel(pixelIndex - size);
+        if (y < size - 1) enqueueBackgroundPixel(pixelIndex + size);
+      }
+      context.putImageData(imageData, 0, 0);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+      texture.anisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
+      this.logoFaceMaterial.map = texture;
+      this.logoFaceMaterial.needsUpdate = true;
+    };
+    image.src = 'assets/Logo%20final.png';
   }
 
   createParticles() {
@@ -172,7 +236,7 @@ class Hero3D {
     geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
 
     const particleMat = new THREE.PointsMaterial({
-      color: 0x9a9aa8,
+      color: 0xd9c68b,
       size: 0.035,
       transparent: true,
       opacity: 0.45,
@@ -193,7 +257,32 @@ class Hero3D {
       if (obj.geometry) obj.geometry.dispose();
     }
 
-    if (presetName === 'knot') {
+    if (presetName === 'logo') {
+      const side = new THREE.MeshStandardMaterial({ color: 0x075735, metalness: 0.82, roughness: 0.24 });
+      this.logoFaceMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.34,
+        metalness: 0.38,
+        transparent: true,
+        alphaTest: 0.04,
+        side: THREE.DoubleSide,
+        toneMapped: false,
+        depthWrite: true
+      });
+      const badge = new THREE.Mesh(
+        new THREE.CylinderGeometry(1.56, 1.56, 0.16, 96, 1, false),
+        [side, this.logoFaceMaterial, this.logoFaceMaterial]
+      );
+      badge.rotation.x = Math.PI / 2;
+      this.meshGroup.add(badge);
+
+      const goldRim = new THREE.Mesh(
+        new THREE.TorusGeometry(1.56, 0.035, 12, 120),
+        new THREE.MeshStandardMaterial({ color: 0xe5a923, metalness: 0.9, roughness: 0.2 })
+      );
+      this.meshGroup.add(goldRim);
+      this.loadLogoTexture();
+    } else if (presetName === 'knot') {
       // Torus Knot with outer wireframe
       const knotGeo = new THREE.TorusKnotGeometry(1.4, 0.4, 128, 28, 2, 3);
       const solidMesh = new THREE.Mesh(knotGeo, this.materials.glass);
@@ -262,6 +351,7 @@ class Hero3D {
     this.canvas.addEventListener('pointerdown', (e) => {
       this.isDragging = true;
       this.previousPointerPosition = { x: e.clientX, y: e.clientY };
+      this.canvas.setPointerCapture?.(e.pointerId);
     });
 
     window.addEventListener('pointermove', (e) => {
@@ -278,6 +368,9 @@ class Hero3D {
     window.addEventListener('pointerup', () => {
       this.isDragging = false;
     });
+    window.addEventListener('pointercancel', () => {
+      this.isDragging = false;
+    });
 
     // Preset selector buttons
     const presetButtons = document.querySelectorAll('[data-preset]');
@@ -291,7 +384,6 @@ class Hero3D {
     });
 
     // Update HUD coordinate indicator
-    this.coordElement = document.getElementById('hud-coords');
   }
 
   onResize() {
@@ -300,6 +392,7 @@ class Hero3D {
     const height = this.container.clientHeight;
 
     this.camera.aspect = width / height;
+    this.cameraDistance = width <= 768 ? 5 : 6.2;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
   }
@@ -322,9 +415,9 @@ class Hero3D {
     this.rotationVelocity.x *= 0.92;
     this.rotationVelocity.y *= 0.92;
 
-    // Base subtle idle rotation + parallax
-    this.meshGroup.rotation.y += 0.006;
-    this.meshGroup.rotation.x = Math.sin(this.time * 0.5) * 0.15 + (this.mouse.y * 0.35);
+    // The badge makes a full, steady turn whenever the user is not dragging.
+    if (!this.isDragging) this.meshGroup.rotation.y += 0.005;
+    this.meshGroup.rotation.x = Math.sin(this.time * 0.35) * 0.07 + (this.mouse.y * 0.2);
     this.meshGroup.rotation.z = Math.cos(this.time * 0.4) * 0.1;
 
     // Parallax on group position
@@ -348,14 +441,7 @@ class Hero3D {
     }
 
     // Floating breathing effect on camera distance
-    this.camera.position.z = 6.2 + Math.sin(this.time * 0.7) * 0.08 - (this.scrollProgress * 1.5);
-
-    // Update Telemetry HUD if present
-    if (this.coordElement && Math.random() < 0.2) {
-      const rotX = (this.mainGroup.rotation.x % (Math.PI * 2)).toFixed(2);
-      const rotY = (this.mainGroup.rotation.y % (Math.PI * 2)).toFixed(2);
-      this.coordElement.textContent = `X: ${rotX} | Y: ${rotY} | Z: 1.00`;
-    }
+    this.camera.position.z = this.cameraDistance + Math.sin(this.time * 0.7) * 0.08 - (this.scrollProgress * 1.5);
 
     this.renderer.render(this.scene, this.camera);
   }

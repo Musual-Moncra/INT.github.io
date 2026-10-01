@@ -1157,3 +1157,132 @@ body.cursor-hover .custom-cursor-ring {
     display: none !important;
   }
 }
+
+/* Phu Hoa Dong visual identity: lacquer green, rice gold and warm paper. */
+:root {
+  --bg-primary: #071c15;
+  --bg-secondary: #0b281d;
+  --bg-card: rgba(17, 55, 39, 0.76);
+  --bg-card-hover: rgba(23, 70, 48, 0.94);
+  --border-subtle: rgba(225, 210, 164, 0.16);
+  --border-hover: rgba(239, 190, 78, 0.42);
+  --border-active: rgba(239, 190, 78, 0.72);
+  --text-primary: #f6f1df;
+  --text-secondary: #c0c8b2;
+  --text-muted: #829684;
+  --accent-glow: rgba(239, 190, 78, 0.2);
+  --accent-cyan: #edbd4f;
+  --accent-purple: #a3c985;
+  --accent-white: #fff4d2;
+}
+
+.hero-ambient-glow {
+  background: radial-gradient(ellipse at center, rgba(25, 105, 62, 0.34) 0%, rgba(8, 34, 24, 0.18) 44%, transparent 72%);
+}
+
+.hero-title {
+  max-width: 1080px;
+  font-size: clamp(2.1rem, 4.4vw, 4.45rem);
+  text-wrap: balance;
+  background: linear-gradient(180deg, #fff8e4 28%, #d9bd76 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  color: #efc963;
+  letter-spacing: 0.025em;
+}
+
+.hero-stage-hud {
+  border-color: rgba(226, 201, 129, 0.16);
+}
+
+.story-lead {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+}
+
+.story-paragraphs p:not(.story-lead) {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.story-paragraphs strong {
+  color: #efc963;
+}
+
+.metric-number {
+  color: #efc963;
+}
+
+.metric-row {
+  background: rgba(8, 38, 26, 0.66);
+}
+
+.chapter-note {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.opportunity-grid .glass-card {
+  min-height: 205px;
+}
+
+.editorial-note {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.35fr) 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 3px solid #e5ad35;
+  background: rgba(239, 190, 78, 0.075);
+}
+
+.note-kicker {
+  color: #efc963;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.editorial-note p {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .editorial-note {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+}
+
+.hero-3d-stage {
+  height: 400px;
+}
+
+@media (max-width: 768px) {
+  .hero-3d-stage {
+    height: clamp(340px, 100vw, 400px);
+  }
+}
+
+.editorial-story-detail {
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  line-height: 1.75;
+  margin: -0.5rem 0 1.5rem;
+}
