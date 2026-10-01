@@ -1431,6 +1431,46 @@ body.cursor-hover .custom-cursor-ring {
   margin: -0.5rem 0 1.5rem;
 }
 
+.chapter-narrative {
+  max-width: 850px;
+  margin: -1.25rem 0 2.5rem;
+}
+
+.story-paragraphs p.story-turn {
+  margin-top: 1.6rem;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid #efbd4f;
+  background: rgba(239, 190, 78, 0.07);
+  color: var(--text-primary);
+}
+
+.story-example {
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(239, 190, 78, 0.2);
+  border-radius: 16px;
+  background: rgba(239, 190, 78, 0.06);
+}
+
+.story-example .note-kicker {
+  display: block;
+  margin-bottom: 0.55rem;
+}
+
+.story-example p {
+  max-width: 760px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.story-example strong {
+  color: var(--text-primary);
+}
+
+.epilogue-text + .epilogue-text {
+  margin-top: -1.5rem;
+}
+
 .audience-section,
 .matching-section {
   margin-top: clamp(2.5rem, 6vw, 4rem);

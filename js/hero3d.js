@@ -156,8 +156,37 @@ class Hero3D {
       canvas.width = canvas.height = size;
       const context = canvas.getContext('2d', { willReadFrequently: true });
       const cropSize = Math.min(image.naturalWidth, image.naturalHeight);
-      const cropX = (image.naturalWidth - cropSize) / 2;
-      const cropY = (image.naturalHeight - cropSize) / 2;
+      // The source file has a wide white margin, so centering its square crop
+      // centers the canvas instead of the emblem. Find the colored artwork
+      // bounds first, then center the crop on the emblem itself.
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.width = image.naturalWidth;
+      sourceCanvas.height = image.naturalHeight;
+      const sourceContext = sourceCanvas.getContext('2d', { willReadFrequently: true });
+      sourceContext.drawImage(image, 0, 0);
+      const sourcePixels = sourceContext.getImageData(0, 0, image.naturalWidth, image.naturalHeight).data;
+      let minX = image.naturalWidth;
+      let maxX = -1;
+      let minY = image.naturalHeight;
+      let maxY = -1;
+      for (let y = 0; y < image.naturalHeight; y++) {
+        for (let x = 0; x < image.naturalWidth; x++) {
+          const i = (y * image.naturalWidth + x) * 4;
+          const r = sourcePixels[i];
+          const g = sourcePixels[i + 1];
+          const b = sourcePixels[i + 2];
+          if (Math.min(r, g, b) >= 232 && Math.max(r, g, b) - Math.min(r, g, b) <= 28) continue;
+          minX = Math.min(minX, x);
+          maxX = Math.max(maxX, x);
+          minY = Math.min(minY, y);
+          maxY = Math.max(maxY, y);
+        }
+      }
+      sourceCanvas.width = 0;
+      const artworkCenterX = maxX >= minX ? (minX + maxX) / 2 : image.naturalWidth / 2;
+      const artworkCenterY = maxY >= minY ? (minY + maxY) / 2 : image.naturalHeight / 2;
+      const cropX = Math.max(0, Math.min(image.naturalWidth - cropSize, artworkCenterX - cropSize / 2));
+      const cropY = Math.max(0, Math.min(image.naturalHeight - cropSize, artworkCenterY - cropSize / 2));
       // CircleGeometry uses direct planar UVs, so preserve the source artwork's
       // orientation. The old cylinder-cap UVs needed this quarter-turn.
       context.drawImage(image, cropX, cropY, cropSize, cropSize, 0, 0, size, size);
