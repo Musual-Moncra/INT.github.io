@@ -275,17 +275,12 @@ class Hero3D {
       badge.rotation.x = Math.PI / 2;
       this.meshGroup.add(badge);
 
-      // Use separate outward-facing disks so the back keeps the same readable
-      // orientation as the front when the medallion turns around.
+      // One double-sided logo face avoids registration drift between duplicated
+      // front and back artwork while the medallion turns.
       const faceGeometry = new THREE.CircleGeometry(1.56, 96);
       const frontFace = new THREE.Mesh(faceGeometry, this.logoFaceMaterial);
       frontFace.position.z = 0.081;
       this.meshGroup.add(frontFace);
-
-      const backFace = new THREE.Mesh(faceGeometry, this.logoFaceMaterial);
-      backFace.position.z = -0.081;
-      backFace.rotation.y = Math.PI;
-      this.meshGroup.add(backFace);
 
       const goldRim = new THREE.Mesh(
         new THREE.TorusGeometry(1.56, 0.035, 12, 120),

@@ -78,11 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
  * Scroll Animations using GSAP
  */
 function initScrollAnimations() {
-  // Keep every chapter readable on small screens, even when a touch scroll
-  // skips past a ScrollTrigger boundary or the browser restores a deep link.
-  if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) return;
+  // Keep chapter content in normal document flow. Scroll-triggered `from`
+  // tweens set opacity to zero before they run, which can leave whole sections
+  // blank when a trigger is skipped, restored from a deep link, or delayed.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Hero reveal
+  // Animate only the opening hero. Story chapters remain visible without
+  // depending on ScrollTrigger timing.
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTl.from('.hero-meta-badge', { y: 20, opacity: 0, duration: 0.8, delay: 0.2 })
         .from('.hero-title', { y: 30, opacity: 0, duration: 1 }, '-=0.5')
@@ -90,106 +92,6 @@ function initScrollAnimations() {
         .from('.hero-3d-stage', { scale: 0.9, opacity: 0, duration: 1.2, ease: 'expo.out' }, '-=0.8')
         .from('.hero-cta-group', { y: 20, opacity: 0, duration: 0.8 }, '-=0.6')
         .from('.hero-scroll-cue', { opacity: 0, duration: 0.8 }, '-=0.4');
-
-  // Chapters Fade-in on Scroll
-  const chapters = document.querySelectorAll('.story-chapter');
-  chapters.forEach((chapter) => {
-    const header = chapter.querySelector('.chapter-header');
-    if (header) {
-      gsap.from(header.children, {
-        scrollTrigger: {
-          trigger: header,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 35,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
-    }
-
-    // Glass cards staggered entrance
-    const cards = chapter.querySelectorAll('.glass-card');
-    if (cards.length > 0) {
-      gsap.from(cards, {
-        scrollTrigger: {
-          trigger: cards[0],
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
-    }
-
-    // Editorial quote block
-    const quote = chapter.querySelector('.editorial-quote-block');
-    if (quote) {
-      gsap.from(quote, {
-        scrollTrigger: {
-          trigger: quote,
-          start: 'top 85%',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
-    }
-
-    // Terminal snippet
-    const terminal = chapter.querySelector('.code-preview-terminal');
-    if (terminal) {
-      gsap.from(terminal, {
-        scrollTrigger: {
-          trigger: terminal,
-          start: 'top 85%',
-        },
-        x: 30,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
-    }
-
-    // Timeline steps
-    const timelineSteps = chapter.querySelectorAll('.timeline-step');
-    if (timelineSteps.length > 0) {
-      timelineSteps.forEach((step, index) => {
-        gsap.from(step, {
-          scrollTrigger: {
-            trigger: step,
-            start: 'top 80%',
-          },
-          x: -25,
-          opacity: 0,
-          duration: 0.8,
-          delay: index * 0.1,
-          ease: 'power2.out'
-        });
-      });
-    }
-  });
-
-  // Epilogue Box
-  const epilogue = document.querySelector('.epilogue-box');
-  if (epilogue) {
-    gsap.from(epilogue, {
-      scrollTrigger: {
-        trigger: epilogue,
-        start: 'top 80%',
-      },
-      scale: 0.96,
-      opacity: 0,
-      duration: 1.1,
-      ease: 'power3.out'
-    });
-  }
 }
 
 /**
