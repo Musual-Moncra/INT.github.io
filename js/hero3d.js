@@ -41,7 +41,7 @@ class Hero3D {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    this.cameraDistance = width <= 768 ? 5 : 6.2;
+    this.cameraDistance = width <= 768 ? 5.5 : 6.2;
     this.camera.position.z = this.cameraDistance;
 
     this.renderer = new THREE.WebGLRenderer({
@@ -158,10 +158,9 @@ class Hero3D {
       const cropSize = Math.min(image.naturalWidth, image.naturalHeight);
       const cropX = (image.naturalWidth - cropSize) / 2;
       const cropY = (image.naturalHeight - cropSize) / 2;
-      context.translate(size / 2, size / 2);
-      context.rotate(-Math.PI / 2);
-      context.drawImage(image, cropX, cropY, cropSize, cropSize, -size / 2, -size / 2, size, size);
-      context.setTransform(1, 0, 0, 1, 0, 0);
+      // CircleGeometry uses direct planar UVs, so preserve the source artwork's
+      // orientation. The old cylinder-cap UVs needed this quarter-turn.
+      context.drawImage(image, cropX, cropY, cropSize, cropSize, 0, 0, size, size);
 
       // Remove only the white background connected to the image edges. White
       // lettering and illustration details inside the badge remain visible.
@@ -270,11 +269,23 @@ class Hero3D {
         depthWrite: true
       });
       const badge = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.56, 1.56, 0.16, 96, 1, false),
-        [side, this.logoFaceMaterial, this.logoFaceMaterial]
+        new THREE.CylinderGeometry(1.56, 1.56, 0.16, 96, 1, true),
+        side
       );
       badge.rotation.x = Math.PI / 2;
       this.meshGroup.add(badge);
+
+      // Use separate outward-facing disks so the back keeps the same readable
+      // orientation as the front when the medallion turns around.
+      const faceGeometry = new THREE.CircleGeometry(1.56, 96);
+      const frontFace = new THREE.Mesh(faceGeometry, this.logoFaceMaterial);
+      frontFace.position.z = 0.081;
+      this.meshGroup.add(frontFace);
+
+      const backFace = new THREE.Mesh(faceGeometry, this.logoFaceMaterial);
+      backFace.position.z = -0.081;
+      backFace.rotation.y = Math.PI;
+      this.meshGroup.add(backFace);
 
       const goldRim = new THREE.Mesh(
         new THREE.TorusGeometry(1.56, 0.035, 12, 120),
@@ -392,7 +403,7 @@ class Hero3D {
     const height = this.container.clientHeight;
 
     this.camera.aspect = width / height;
-    this.cameraDistance = width <= 768 ? 5 : 6.2;
+    this.cameraDistance = width <= 768 ? 5.5 : 6.2;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
   }

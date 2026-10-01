@@ -78,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
  * Scroll Animations using GSAP
  */
 function initScrollAnimations() {
+  // Keep every chapter readable on small screens, even when a touch scroll
+  // skips past a ScrollTrigger boundary or the browser restores a deep link.
+  if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) return;
+
   // Hero reveal
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTl.from('.hero-meta-badge', { y: 20, opacity: 0, duration: 0.8, delay: 0.2 })
