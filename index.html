@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INT — Minimalist Project Chronicle & 3D Narrative</title>
+  <meta name="description" content="Trang landing page kể câu chuyện về dự án INT với phong cách Minimalist, animation mượt mà và Web 3D Hero tương tác ở giữa.">
+
+  <!-- Open Graph & Twitter Meta Tags -->
+  <meta property="og:title" content="INT — Minimalist Project Chronicle">
+  <meta property="og:description" content="Một câu chuyện thị giác về dự án INT: Kiến trúc, động lực và hành trình phát triển.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Grain Overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  </div>
+
+  <!-- Custom Inertia Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-ring"></div>
+
+  <!-- ===================================================================
+       NAVIGATION BAR
+       =================================================================== -->
+  <header class="navbar">
+    <a href="#" class="nav-brand">
+      <span class="brand-dot"></span>
+      <span>INT</span>
+      <span class="brand-tag">Chronicle</span>
+    </a>
+
+    <!-- Chapter Fast Links -->
+    <nav class="nav-chapters">
+      <li><a href="#hero"><span class="chapter-num">00</span> Khởi đầu</a></li>
+      <li><a href="#origins"><span class="chapter-num">01</span> Khởi nguồn</a></li>
+      <li><a href="#challenge"><span class="chapter-num">02</span> Thách thức</a></li>
+      <li><a href="#core"><span class="chapter-num">03</span> Cốt lõi</a></li>
+      <li><a href="#evolution"><span class="chapter-num">04</span> Hành trình</a></li>
+      <li><a href="#epilogue"><span class="chapter-num">05</span> Tương lai</a></li>
+    </nav>
+
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <!-- Ambient Audio Synthesizer Toggle -->
+      <button class="btn-icon" id="sound-toggle-btn" title="Phát âm thanh thư giãn ambient" aria-label="Toggle Sound">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+
+      <!-- GitHub Repository Link -->
+      <a href="https://github.com/Musual-Moncra/INT.github.io" target="_blank" rel="noopener noreferrer" class="btn-icon" title="Xem GitHub Repository">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+
+      <!-- Guide CTA -->
+      <button class="btn-outline" id="open-guide-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Hướng dẫn nội dung</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fixed Side Chapter Tracker (Desktop) -->
+  <aside class="side-tracker" aria-hidden="true">
+    <a class="side-track-item active" data-target="hero" href="#hero">
+      <div class="track-dot"></div>
+      <span class="track-label">00 // Prologue</span>
+    </a>
+    <a class="side-track-item" data-target="origins" href="#origins">
+      <div class="track-dot"></div>
+      <span class="track-label">01 // Origins</span>
+    </a>
+    <a class="side-track-item" data-target="challenge" href="#challenge">
+      <div class="track-dot"></div>
+      <span class="track-label">02 // Challenge</span>
+    </a>
+    <a class="side-track-item" data-target="core" href="#core">
+      <div class="track-dot"></div>
+      <span class="track-label">03 // Core Engine</span>
+    </a>
+    <a class="side-track-item" data-target="evolution" href="#evolution">
+      <div class="track-dot"></div>
+      <span class="track-label">04 // Evolution</span>
+    </a>
+    <a class="side-track-item" data-target="epilogue" href="#epilogue">
+      <div class="track-dot"></div>
+      <span class="track-label">05 // Epilogue</span>
+    </a>
+  </aside>
+
+  <main>
+    <!-- ===================================================================
+         SECTION 00: HERO (CENTERED 3D STAGE)
+         =================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-ambient-glow"></div>
+
+      <!-- Status Pill -->
+      <div class="hero-meta-badge">
+        <span class="status-ping"></span>
+        <span>CHAPTER 00 // PROJECT CHRONICLE PREVIEW</span>
+      </div>
+
+      <!-- [EDIT: TÊN DỰ ÁN VÀ TIÊU ĐỀ CHÍNH CỦA BẠN] -->
+      <h1 class="hero-title">
+        KIẾN TẠO MỘT TRẢI NGHIỆM ĐỘT PHÁ
+      </h1>
+
+      <!-- [EDIT: MÔ TẢ NGẮN / SLOGAN DỰ ÁN] -->
+      <p class="hero-subtitle">
+        Một câu chuyện trực quan về hành trình hình thành, triết lý thiết kế và công nghệ nền tảng của dự án INT.
+      </p>
+
+      <!-- 3D HERO CANVAS STAGE (CENTERED) -->
+      <div class="hero-3d-stage">
+        <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
+
+        <!-- Orbital HUD Overlay -->
+        <div class="hero-stage-hud">
+          <div class="hud-top">
+            <span class="hud-coordinate" id="hud-coords">X: 0.00 | Y: 0.00 | Z: 1.00</span>
+            <span class="hud-interactive-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              XOAY & KÉO 3D BẰNG CHUỘT
+            </span>
+          </div>
+          <div class="hud-bottom">
+            <span>WEBGL 3D INTERACTIVE HERO</span>
+            <span>FPS: 60 // HIGH PRECISION</span>
+          </div>
+        </div>
+
+        <!-- 3D Switchable Preset Controls -->
+        <div class="hero-3d-controls">
+          <button class="preset-btn active" data-preset="knot">Quantum Knot</button>
+          <button class="preset-btn" data-preset="core">Orbital Core</button>
+          <button class="preset-btn" data-preset="poly">Cyber Poly</button>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta-group">
+        <a href="#origins" class="btn-primary">
+          <span>Bắt đầu câu chuyện</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="#core" class="btn-outline">
+          <span>Xem công nghệ cốt lõi</span>
+        </a>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#origins" class="hero-scroll-cue" aria-label="Cuộn xuống để khám phá">
+        <div class="scroll-mouse-icon">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Cuộn để khám phá</span>
+      </a>
+    </section>
+
+    <div class="story-container">
+
+      <!-- ===================================================================
+           CHAPTER 01: ORIGINS (KHỞI NGUỒN)
+           =================================================================== -->
+      <section class="story-chapter" id="origins">
+        <div class="chapter-header">
+          <div class="chapter-badge">// CHƯƠNG 01 &bull; KHỞI NGUỒN</div>
+          <h2 class="chapter-title">Mọi bước chuyển mình đều bắt đầu từ một nghịch lý.</h2>
+          <p class="chapter-description">
+            Chúng tôi tự hỏi: Tại sao công nghệ ngày càng tiên tiến, nhưng trải nghiệm xây dựng và tiếp cận dự án lại ngày càng trở nên cồng kềnh, phân mảnh và nặng nề?
+          </p>
+        </div>
+
+        <div class="editorial-grid">
+          <!-- Story Paragraphs -->
+          <div class="story-paragraphs">
+            <!-- [EDIT: ĐOẠN VĂN KỂ VỀ LÝ DO BẠN BẮT ĐẦU DỰ ÁN] -->
+            <p style="font-size: 1.08rem; color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.8;">
+              Ý tưởng về <strong>INT</strong> không xuất hiện từ một kế hoạch kinh doanh phức tạp, mà được nhen nhóm trong những đêm dài thử nghiệm khi đối mặt với vô số rào cản kỹ thuật.
+            </p>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.75;">
+              Các giải pháp hiện thời thường đánh đổi giữa vẻ đẹp thẩm mỹ và hiệu năng tốc độ, hoặc giữa tính linh hoạt và sự phức tạp quá mức. Chúng tôi muốn tạo ra một chuẩn mực mới: nơi sự tối giản (Minimalism) kết hợp hài hòa với trải nghiệm tương tác 3D mượt mà.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.75;">
+              Mục tiêu là đưa người xem vào một dòng chảy tự nhiên (narrative flow) — nơi mỗi tương tác, mỗi khung hình đều có chủ đích rõ ràng và không một chi tiết nào là thừa thãi.
+            </p>
+          </div>
+
+          <!-- Editorial Quote Block -->
+          <div class="editorial-quote-block">
+            <p class="editorial-quote-text">
+              “Sự hoàn hảo không phải là khi không còn gì để thêm vào, mà là khi không còn gì có thể bớt đi.”
+            </p>
+            <div class="editorial-quote-author">
+              <div class="author-avatar">INT</div>
+              <div class="author-meta">
+                <h5>Đội ngũ phát triển INT</h5>
+                <p>Triết lý thiết kế tối giản</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 02: THE CHALLENGE (THÁCH THỨC CẦN GIẢI QUYẾT)
+           =================================================================== -->
+      <section class="story-chapter" id="challenge">
+        <div class="chapter-header">
+          <div class="chapter-badge">// CHƯƠNG 02 &bull; THÁCH THỨC</div>
+          <h2 class="chapter-title">Ba nút thắt mà chúng tôi quyết tâm giải quyết.</h2>
+          <p class="chapter-description">
+            Những vấn đề cốt lõi mà người dùng thường gặp phải trong các hệ thống hiện tại, và cách tiếp cận hoàn toàn mới của dự án.
+          </p>
+        </div>
+
+        <!-- Friction Cards -->
+        <div class="cards-grid-3">
+          <div class="glass-card">
+            <div class="card-num">01 // VẤN ĐỀ 1</div>
+            <h3 class="card-title">Độ trễ & Cồng kềnh</h3>
+            <p class="card-body">
+              Các hiệu ứng 3D và animation truyền thống thường gây giật lag và tiêu tốn tài nguyên thiết bị quá mức, làm gián đoạn trải nghiệm của người xem.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <div class="card-num">02 // VẤN ĐỀ 2</div>
+            <h3 class="card-title">Thiếu sự liền mạch</h3>
+            <p class="card-body">
+              Nội dung và hình ảnh thường bị chia cắt, không tạo được cảm giác đang thưởng thức một câu chuyện có chiều sâu và cảm xúc thị giác.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <div class="card-num">03 // VẤN ĐỀ 3</div>
+            <h3 class="card-title">Khó tùy biến & mở rộng</h3>
+            <p class="card-body">
+              Mã nguồn quá phức tạp khiến việc điều chỉnh nội dung, thêm chương mới hoặc tích hợp vào hệ sinh thái hiện có gặp nhiều khó khăn.
+            </p>
+          </div>
+        </div>
+
+        <!-- Metric Highlight Bar -->
+        <div class="metric-row">
+          <div class="metric-item">
+            <div class="metric-number">60 FPS</div>
+            <div class="metric-label">Khung hình ổn định với tối ưu hóa WebGL</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">&lt; 0.5s</div>
+            <div class="metric-label">Thời gian phản hồi tương tác tức thì</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">100%</div>
+            <div class="metric-label">Tự do kiểm soát và tinh chỉnh mã nguồn</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 03: THE CORE ENGINE (CỐT LÕI CÔNG NGHỆ)
+           =================================================================== -->
+      <section class="story-chapter" id="core">
+        <div class="chapter-header">
+          <div class="chapter-badge">// CHƯƠNG 03 &bull; CỐT LÕI CÔNG NGHỆ</div>
+          <h2 class="chapter-title">Kiến trúc thiết kế tinh gọn nhưng bền vững.</h2>
+          <p class="chapter-description">
+            Chúng tôi kết hợp Three.js, GSAP và Lenis mượt mà để xây dựng nền tảng vững chắc cho việc truyền tải thông điệp.
+          </p>
+        </div>
+
+        <div class="architecture-showcase">
+          <!-- Core Principles List -->
+          <div class="pillar-cards" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div class="glass-card" style="padding: 1.5rem;">
+              <h4 style="color: #ffffff; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="color: var(--accent-cyan); font-family: var(--font-heading);">01.</span>
+                Tối ưu hóa tài nguyên phần cứng
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                Sử dụng rendering pipeline nhẹ, quản lý bộ nhớ thông minh cho WebGL canvas trung tâm và tự động điều tiết theo màn hình người dùng.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.5rem;">
+              <h4 style="color: #ffffff; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="color: var(--accent-purple); font-family: var(--font-heading);">02.</span>
+                Cuộn trang quán tính mềm mại (Lenis)
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                Đồng bộ hóa nhịp nhàng giữa thao tác vuốt cuộn và các hiệu ứng chuyển cảnh của GSAP ScrollTrigger mà không gây cảm giác delay nhân tạo.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.5rem;">
+              <h4 style="color: #ffffff; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="color: #ffffff; font-family: var(--font-heading);">03.</span>
+                Cấu trúc module dễ chỉnh sửa
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                Mỗi phần của câu chuyện được đánh dấu rõ ràng, giúp bạn dễ dàng thay thế văn bản, hình ảnh hoặc các tham số kỹ thuật bất cứ lúc nào.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Code Terminal Preview -->
+          <div class="code-preview-terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="terminal-dot" style="background: #ef4444;"></span>
+                <span class="terminal-dot" style="background: #eab308;"></span>
+                <span class="terminal-dot" style="background: #22c55e;"></span>
+              </div>
+              <span class="terminal-title">architecture/chronicle-core.js</span>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">ES6+</span>
+            </div>
+            <pre class="terminal-body"><code><span class="token-comment">// Khởi tạo không gian 3D trung tâm</span>
+<span class="token-keyword">import</span> { Hero3D } <span class="token-keyword">from</span> <span class="token-string">'./hero3d.js'</span>;
+<span class="token-keyword">import</span> { LenisScroll } <span class="token-keyword">from</span> <span class="token-string">'./lenis.js'</span>;
+
+<span class="token-keyword">const</span> chronicle = <span class="token-keyword">new</span> <span class="token-function">ProjectChronicle</span>({
+  target: <span class="token-string">'#hero-3d-canvas'</span>,
+  preset: <span class="token-string">'quantum-knot'</span>,
+  physics: {
+    inertiaDamping: <span class="token-string">0.92</span>,
+    mouseParallax: <span class="token-string">true</span>
+  },
+  narrative: {
+    smoothScroll: <span class="token-string">true</span>,
+    scrollTriggerSync: <span class="token-string">true</span>
+  }
+});
+
+chronicle.<span class="token-function">init</span>(); <span class="token-comment">// Sẵn sàng kể câu chuyện</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 04: EVOLUTION (HÀNH TRÌNH & CỘT MỐC)
+           =================================================================== -->
+      <section class="story-chapter" id="evolution">
+        <div class="chapter-header">
+          <div class="chapter-badge">// CHƯƠNG 04 &bull; HÀNH TRÌNH</div>
+          <h2 class="chapter-title">Những chặng đường đã qua và đang tiếp bước.</h2>
+          <p class="chapter-description">
+            Từng cột mốc quan trọng trong quá trình nghiên cứu, thử nghiệm và định hình dự án INT.
+          </p>
+        </div>
+
+        <div class="timeline-track">
+          <div class="timeline-line"></div>
+
+          <!-- Timeline Step 1 -->
+          <div class="timeline-step completed">
+            <div class="timeline-pin"></div>
+            <div class="timeline-meta">
+              <span class="badge">GIAI ĐOẠN 01</span>
+              <span>GỐC RỄ & KHẢO SÁT &bull; THÁNG 01</span>
+            </div>
+            <div class="timeline-content-card">
+              <h3 class="timeline-title">Phát hiện vấn đề & Phác thảo ý tưởng ban đầu</h3>
+              <p class="timeline-desc">
+                Thực hiện các khảo sát thực tế, thử nghiệm các thuật toán hiển thị 3D sơ khai và thiết lập triết lý thiết kế Minimalist không thỏa hiệp.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Step 2 -->
+          <div class="timeline-step completed">
+            <div class="timeline-pin"></div>
+            <div class="timeline-meta">
+              <span class="badge">GIAI ĐOẠN 02</span>
+              <span>KIẾN TRÚC & NỀN TẢNG &bull; THÁNG 03</span>
+            </div>
+            <div class="timeline-content-card">
+              <h3 class="timeline-title">Xây dựng kiến trúc tương tác 3D WebGL</h3>
+              <p class="timeline-desc">
+                Hiện thực hóa mô hình 3D Hero trung tâm với tương tác chuột, con quay hồi chuyển và cơ chế quán tính mượt mà.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Step 3 -->
+          <div class="timeline-step completed">
+            <div class="timeline-pin"></div>
+            <div class="timeline-meta">
+              <span class="badge">GIAI ĐOẠN 03</span>
+              <span>TỐI ƯU HÓA & NARRATIVE &bull; THÁNG 06</span>
+            </div>
+            <div class="timeline-content-card">
+              <h3 class="timeline-title">Tích hợp Lenis & Dòng chảy câu chuyện GSAP</h3>
+              <p class="timeline-desc">
+                Kết hợp trải nghiệm cuộn trang tự nhiên với hiệu ứng hiển thị từng chương, tạo nên cảm giác lôi cuốn như đọc một cuốn biên niên sử kỹ thuật số.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Step 4 -->
+          <div class="timeline-step">
+            <div class="timeline-pin"></div>
+            <div class="timeline-meta">
+              <span class="badge" style="background: rgba(94, 234, 212, 0.15); color: var(--accent-cyan);">HIỆN TẠI</span>
+              <span>RA MẮT PREVIEW & ĐÓN NHẬN NỘI DUNG &bull; HÔM NAY</span>
+            </div>
+            <div class="timeline-content-card">
+              <h3 class="timeline-title">Mở rộng hệ sinh thái & Tiếp nhận đóng góp</h3>
+              <p class="timeline-desc">
+                Hoàn thiện bản mẫu template, sẵn sàng tích hợp toàn bộ nội dung chi tiết của bạn và triển khai trực tiếp lên GitHub Pages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 05: EPILOGUE (TƯƠNG LAI & THAM GIA)
+           =================================================================== -->
+      <section class="story-chapter" id="epilogue">
+        <div class="epilogue-box">
+          <div class="chapter-badge" style="justify-content: center; margin-bottom: 1.5rem;">
+            // CHƯƠNG 05 &bull; TƯƠNG LAI
+          </div>
+          <!-- [EDIT: TIÊU ĐỀ KẾT THÚC / LỜI KÊU GỌI HÀNH ĐỘNG] -->
+          <h2 class="epilogue-title">
+            Hãy cùng chúng tôi viết tiếp những chương tiếp theo.
+          </h2>
+          <p class="epilogue-text">
+            Dự án INT vẫn đang trên đà phát triển mạnh mẽ. Mọi ý tưởng đóng góp, phản hồi kỹ thuật hay câu hỏi từ bạn đều là những viên gạch quý báu định hình tương lai của dự án.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="https://github.com/Musual-Moncra/INT.github.io" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>Star trên GitHub</span>
+            </a>
+
+            <button class="btn-outline" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+              <span>Trở về đầu trang</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===================================================================
+       FOOTER
+       =================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-copyright">
+        &copy; 2026 <strong>INT Project</strong>. Mọi quyền được bảo lưu. Thiết kế theo phong cách Minimalist & Web 3D.
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Về đầu trang</a>
+        <a href="#origins">Khởi nguồn</a>
+        <a href="#core">Kiến trúc</a>
+        <a href="https://github.com/Musual-Moncra/INT.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       GUIDE MODAL (HƯỚNG DẪN THAY ĐỔI NỘI DUNG)
+       =================================================================== -->
+  <div id="guide-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: #111116; border: 1px solid var(--border-hover); border-radius: 20px; max-width: 620px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 2rem; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-family: var(--font-heading); color: #ffffff; font-size: 1.3rem;">📋 Hướng dẫn thay thế nội dung</h3>
+        <button id="close-guide-btn" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; line-height: 1;">&times;</button>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
+        Trang này đã được thiết kế sẵn theo dạng template chuẩn, phân bổ theo 5 chương câu chuyện. Bạn có thể gửi nội dung cho tôi hoặc trực tiếp sửa trong <code style="color: var(--accent-cyan); background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">index.html</code>:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.88rem;">
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+          <strong style="color: #ffffff;">1. Tiêu đề & Hero (Chương 00)</strong>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">Tìm thẻ <code style="color: var(--accent-cyan);">&lt;h1 class="hero-title"&gt;</code> và <code style="color: var(--accent-cyan);">&lt;p class="hero-subtitle"&gt;</code> để đổi tên dự án và slogan.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+          <strong style="color: #ffffff;">2. Câu chuyện khởi nguồn (Chương 01)</strong>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">Khu vực <code style="color: var(--accent-cyan);">&lt;section id="origins"&gt;</code> chứa các đoạn văn kể về lý do, cơ duyên hoặc cảm hứng hình thành dự án cùng câu trích dẫn.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+          <strong style="color: #ffffff;">3. Thách thức & Điểm nghẽn (Chương 02)</strong>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">Khu vực <code style="color: var(--accent-cyan);">&lt;section id="challenge"&gt;</code> gồm 3 thẻ vấn đề và các chỉ số ấn tượng (FPS, tốc độ, mục tiêu).</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+          <strong style="color: #ffffff;">4. Công nghệ & Kiến trúc (Chương 03)</strong>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">Khu vực <code style="color: var(--accent-cyan);">&lt;section id="core"&gt;</code> gồm 3 trụ cột kỹ thuật và ô code terminal mẫu.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+          <strong style="color: #ffffff;">5. Lộ trình phát triển & Kết thúc (Chương 04, 05)</strong>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">Khu vực <code style="color: var(--accent-cyan);">&lt;section id="evolution"&gt;</code> chứa timeline các giai đoạn và phần kêu gọi tham gia ở cuối trang.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: right;">
+        <button class="btn-primary" onclick="document.getElementById('guide-modal').classList.add('hidden')">
+          Đã hiểu, đóng bảng này
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #guide-modal.hidden {
+      display: none !important;
+    }
+  </style>
+
+  <!-- ===================================================================
+       VENDOR LIBRARIES (Local vendor files for zero latency & offline support)
+       =================================================================== -->
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="js/hero3d.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

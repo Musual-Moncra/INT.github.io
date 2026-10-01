@@ -1,0 +1,19 @@
+{
+  "name": "int-github-io",
+  "version": "1.0.0",
+  "description": "Minimalist 3D Narrative Landing Page for INT",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "threejs",
+    "minimalist",
+    "storytelling",
+    "landing-page",
+    "gsap",
+    "lenis"
+  ],
+  "author": "Musual-Moncra",
+  "license": "MIT"
+}
