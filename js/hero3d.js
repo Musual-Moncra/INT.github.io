@@ -455,9 +455,9 @@ class Hero3D {
     this.meshGroup.rotation.x = Math.sin(this.time * 0.35) * 0.07 + (this.mouse.y * 0.2);
     this.meshGroup.rotation.z = Math.cos(this.time * 0.4) * 0.1;
 
-    // Parallax on group position
-    this.mainGroup.position.x = this.mouse.x * 0.25;
-    this.mainGroup.position.y = -this.mouse.y * 0.25;
+    // Keep the badge and orbit rings anchored to the static HUD outline.
+    // Parallax translation made the logo visibly drift away from the frame.
+    this.mainGroup.position.set(0, 0, 0);
 
     // Revolving orbit rings
     if (this.ring1) {
