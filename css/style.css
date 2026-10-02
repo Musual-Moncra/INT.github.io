@@ -2223,6 +2223,12 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #challenge .challenge-question,
 #challenge .story-turn { text-align: center; }
 
+#challenge .challenge-question {
+  margin: 0 auto clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-inline: 1rem;
+  line-height: 1.8;
+}
+
 @media (max-width: 900px) {
   .audience-grid,
   .matching-grid {
