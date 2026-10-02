@@ -2229,6 +2229,8 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
   line-height: 1.8;
 }
 
+#challenge .chapter-narrative { margin-top: 0; }
+
 @media (max-width: 900px) {
   .audience-grid,
   .matching-grid {
