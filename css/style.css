@@ -1436,12 +1436,37 @@ body.cursor-hover .custom-cursor-ring {
   margin: -1.25rem 0 2.5rem;
 }
 
+.story-lead::first-letter {
+  float: left;
+  margin: 0.1rem 0.55rem 0 0;
+  color: #f0c15a;
+  font-family: var(--font-heading);
+  font-size: 3.4em;
+  font-weight: 700;
+  line-height: 0.78;
+}
+
 .story-paragraphs p.story-turn {
   margin-top: 1.6rem;
   padding: 1rem 1.25rem;
   border-left: 2px solid #efbd4f;
   background: rgba(239, 190, 78, 0.07);
   color: var(--text-primary);
+}
+
+#origins .story-turn {
+  border-color: #efbd4f;
+  background: linear-gradient(100deg, rgba(239, 190, 78, 0.12), rgba(239, 190, 78, 0.025));
+}
+
+#challenge .story-turn {
+  border-color: #77c8db;
+  background: linear-gradient(100deg, rgba(119, 200, 219, 0.12), rgba(119, 200, 219, 0.025));
+}
+
+#core .story-turn {
+  border-color: #8ed4b5;
+  background: linear-gradient(100deg, rgba(142, 212, 181, 0.12), rgba(142, 212, 181, 0.025));
 }
 
 .story-example {
