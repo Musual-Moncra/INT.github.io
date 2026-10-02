@@ -2246,7 +2246,11 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
     margin-inline: auto;
   }
   #challenge .story-turn {
-    white-space: nowrap;
+    width: max-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    white-space: normal;
     font-size: clamp(0.82rem, 1.05vw, 1rem);
   }
   #core .chapter-narrative { max-width: min(100%, 900px); }
