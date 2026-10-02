@@ -2339,12 +2339,12 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 .footer-school-logo { width: clamp(8rem, 18vw, 9.5rem); height: 75px; }
 .footer-event-logo { width: clamp(6.5rem, 15vw, 8rem); height: 82px; }
 .footer-project-logo {
-  width: 112px;
-  height: 72px;
-  padding: 3px;
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  background: #ffffff;
+  width: 82px;
+  height: 82px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 .footer-school-logo-dark { display: none; }
 :root[data-theme="dark"] .footer-school-logo-light { display: none; }
