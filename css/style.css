@@ -1506,10 +1506,10 @@ body.cursor-hover .custom-cursor-ring {
 :root[data-theme="light"][data-palette="cream"] {
   color-scheme: light;
   --bg-primary: #fff7e6; --bg-secondary: #f5eddb;
-  --bg-card: #fffdf8; --bg-card-hover: #ffffff;
+  --bg-card: #f2ebdc; --bg-card-hover: #ebe2cf;
   --bg-navbar: rgba(255, 247, 230, 0.96); --bg-menu: rgba(255, 252, 243, 0.99);
   --bg-control: rgba(24, 52, 40, 0.055); --bg-solid: #ffffff;
-  --border-subtle: rgba(28, 61, 43, 0.17); --border-hover: rgba(23, 99, 61, 0.42); --border-active: rgba(23, 99, 61, 0.72);
+  --border-subtle: rgba(51, 66, 53, 0.24); --border-hover: rgba(23, 99, 61, 0.5); --border-active: rgba(23, 99, 61, 0.76);
   --text-primary: #142a1e; --text-secondary: #2b4436; --text-muted: #3b5445; --text-on-accent: #ffffff;
   --accent-cyan: #17633d; --accent-purple: #476c46; --accent-glow: rgba(23, 99, 61, 0.17);
   --hero-title-top: #17633d; --hero-title-bottom: #78520b; --hero-glow: rgba(106, 151, 83, 0.16); --gold-text: #78520b;
@@ -1518,9 +1518,9 @@ body.cursor-hover .custom-cursor-ring {
 :root[data-theme="light"][data-palette="white"] {
   color-scheme: light;
   --bg-primary: #ffffff; --bg-secondary: #f3f5f2;
-  --bg-card: #f7f9f7; --bg-card-hover: #eef5ef;
+  --bg-card: #eef1ee; --bg-card-hover: #e4ebe5;
   --bg-navbar: rgba(255, 255, 255, 0.96); --bg-menu: rgba(255, 255, 255, 0.99); --bg-control: rgba(24, 52, 40, 0.055); --bg-solid: #ffffff;
-  --border-subtle: rgba(28, 61, 43, 0.17); --border-hover: rgba(23, 99, 61, 0.42); --border-active: rgba(23, 99, 61, 0.72);
+  --border-subtle: rgba(45, 62, 51, 0.23); --border-hover: rgba(23, 99, 61, 0.5); --border-active: rgba(23, 99, 61, 0.76);
   --text-primary: #142a1e; --text-secondary: #2b4436; --text-muted: #3b5445; --text-on-accent: #ffffff;
   --accent-cyan: #17633d; --accent-purple: #476c46; --accent-glow: rgba(23, 99, 61, 0.17);
   --hero-title-top: #17633d; --hero-title-bottom: #78520b; --hero-glow: rgba(106, 151, 83, 0.12); --gold-text: #78520b;
@@ -1529,9 +1529,9 @@ body.cursor-hover .custom-cursor-ring {
 :root[data-theme="light"][data-palette="green"] {
   color-scheme: light;
   --bg-primary: #eaf4e8; --bg-secondary: #deebdc;
-  --bg-card: #f8fbf7; --bg-card-hover: #ffffff;
+  --bg-card: #dce8da; --bg-card-hover: #cfdfd0;
   --bg-navbar: rgba(234, 244, 232, 0.96); --bg-menu: rgba(246, 251, 244, 0.99); --bg-control: rgba(24, 52, 40, 0.06); --bg-solid: #ffffff;
-  --border-subtle: rgba(28, 61, 43, 0.17); --border-hover: rgba(23, 99, 61, 0.42); --border-active: rgba(23, 99, 61, 0.72);
+  --border-subtle: rgba(39, 66, 47, 0.25); --border-hover: rgba(23, 99, 61, 0.5); --border-active: rgba(23, 99, 61, 0.76);
   --text-primary: #142a1e; --text-secondary: #2b4436; --text-muted: #3b5445; --text-on-accent: #ffffff;
   --accent-cyan: #17633d; --accent-purple: #476c46; --accent-glow: rgba(23, 99, 61, 0.17);
   --hero-title-top: #17633d; --hero-title-bottom: #78520b; --hero-glow: rgba(72, 137, 83, 0.15); --gold-text: #78520b;
@@ -1539,9 +1539,9 @@ body.cursor-hover .custom-cursor-ring {
 
 :root[data-theme="dark"][data-palette="white"] {
   color-scheme: dark;
-  --bg-primary: #101413; --bg-secondary: #1b211e; --bg-card: rgba(33, 42, 37, 0.92); --bg-card-hover: #303b34;
+  --bg-primary: #101413; --bg-secondary: #1b211e; --bg-card: #252d29; --bg-card-hover: #303b34;
   --bg-navbar: rgba(16, 20, 19, 0.96); --bg-menu: rgba(25, 31, 28, 0.99); --bg-control: rgba(255, 255, 255, 0.06); --bg-solid: #202722;
-  --border-subtle: rgba(235, 241, 228, 0.17); --border-hover: rgba(239, 190, 78, 0.45); --border-active: rgba(239, 190, 78, 0.75);
+  --border-subtle: rgba(230, 236, 232, 0.28); --border-hover: rgba(239, 190, 78, 0.56); --border-active: rgba(239, 190, 78, 0.82);
   --text-primary: #ffffff; --text-secondary: #e6ece8; --text-muted: #cad4cc; --text-on-accent: #13291d;
   --accent-cyan: #edbd4f; --accent-purple: #a3c985; --accent-glow: rgba(239, 190, 78, 0.2);
   --hero-title-top: #fff8e4; --hero-title-bottom: #d9bd76; --hero-glow: rgba(122, 145, 111, 0.16); --gold-text: #efc963;
@@ -1549,9 +1549,9 @@ body.cursor-hover .custom-cursor-ring {
 
 :root[data-theme="dark"][data-palette="green"] {
   color-scheme: dark;
-  --bg-primary: #071c15; --bg-secondary: #0b281d; --bg-card: rgba(17, 55, 39, 0.88); --bg-card-hover: rgba(23, 70, 48, 0.98);
+  --bg-primary: #071c15; --bg-secondary: #0b281d; --bg-card: #12402c; --bg-card-hover: #194b35;
   --bg-navbar: rgba(7, 28, 21, 0.96); --bg-menu: rgba(11, 40, 29, 0.99); --bg-control: rgba(255, 255, 255, 0.06); --bg-solid: #103624;
-  --border-subtle: rgba(225, 235, 205, 0.17); --border-hover: rgba(239, 190, 78, 0.45); --border-active: rgba(239, 190, 78, 0.75);
+  --border-subtle: rgba(230, 236, 232, 0.28); --border-hover: rgba(239, 190, 78, 0.56); --border-active: rgba(239, 190, 78, 0.82);
   --text-primary: #ffffff; --text-secondary: #e6ece8; --text-muted: #cad4cc; --text-on-accent: #13291d;
   --accent-cyan: #edbd4f; --accent-purple: #a3c985; --accent-glow: rgba(239, 190, 78, 0.2);
   --hero-title-top: #fff8e4; --hero-title-bottom: #d9bd76; --hero-glow: rgba(25, 105, 62, 0.24); --gold-text: #efc963;
@@ -1559,9 +1559,9 @@ body.cursor-hover .custom-cursor-ring {
 
 :root[data-theme="dark"][data-palette="cream"] {
   color-scheme: dark;
-  --bg-primary: #211c13; --bg-secondary: #30291d; --bg-card: rgba(55, 45, 30, 0.9); --bg-card-hover: #453923;
+  --bg-primary: #211c13; --bg-secondary: #30291d; --bg-card: #3a3124; --bg-card-hover: #493b29;
   --bg-navbar: rgba(33, 28, 19, 0.96); --bg-menu: rgba(47, 39, 25, 0.99); --bg-control: rgba(255, 255, 255, 0.07); --bg-solid: #382d1e;
-  --border-subtle: rgba(244, 226, 187, 0.18); --border-hover: rgba(239, 190, 78, 0.47); --border-active: rgba(239, 190, 78, 0.75);
+  --border-subtle: rgba(245, 235, 215, 0.3); --border-hover: rgba(239, 190, 78, 0.58); --border-active: rgba(239, 190, 78, 0.84);
   --text-primary: #ffffff; --text-secondary: #e6ece8; --text-muted: #cad4cc; --text-on-accent: #2b220f;
   --accent-cyan: #f1c45e; --accent-purple: #c5d59a; --accent-glow: rgba(239, 190, 78, 0.21);
   --hero-title-top: #fff8e4; --hero-title-bottom: #e0bd70; --hero-glow: rgba(194, 139, 53, 0.16); --gold-text: #f1c45e;
