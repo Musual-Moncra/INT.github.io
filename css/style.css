@@ -914,6 +914,7 @@ body {
   line-height: 1.15;
   color: #ffffff;
   margin-bottom: 1rem;
+  text-wrap: balance;
 }
 
 .chapter-description {
@@ -921,6 +922,7 @@ body {
   color: var(--text-secondary);
   max-width: 700px;
   line-height: 1.7;
+  text-wrap: pretty;
 }
 
 /* Editorial Split Layout */
@@ -968,12 +970,39 @@ body {
 }
 
 .poem-quote-box figcaption {
-  margin-top: 1.1rem;
+  width: fit-content;
+  margin: 1.1rem auto 0;
+  position: relative;
+  left: clamp(-2rem, -4vw, -1rem);
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
-.poem-quote-box cite { font-style: normal; }
+.poem-quote-box cite { font-style: italic; }
+
+.story-paragraphs,
+.chapter-narrative,
+.chapter-note,
+.editorial-story-detail,
+.story-example p,
+.glass-card .card-body,
+.timeline-desc,
+.epilogue-text,
+.choice-note,
+.editorial-note p,
+.matching-grid p,
+.origin-map-caption,
+.footer-copyright {
+  text-wrap: pretty;
+}
+
+.card-title,
+.timeline-title,
+.origin-map-title,
+.epilogue-title,
+.audience-heading h3 {
+  text-wrap: balance;
+}
 
 .editorial-quote-block::before {
   content: '“';
@@ -1309,6 +1338,10 @@ body {
   margin: 0 auto 2.5rem auto;
   line-height: 1.6;
 }
+
+#journey,
+#evolution { scroll-margin-top: var(--header-offset); }
+#epilogue { scroll-margin-top: var(--header-offset); }
 
 /* ===================================================================
    FLOATING TEMPLATE GUIDE DRAWER (For user to preview & edit)
@@ -2046,7 +2079,7 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
   line-height: 1.7;
 }
 
-/* Center the complete story flow, including cards, notes, metrics and timeline. */
+/* Keep titles and story ornaments centered; desktop body copy reads from the left. */
 .story-chapter {
   text-align: center;
 }
@@ -2133,6 +2166,34 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 
 .footer-copyright { max-width: 760px; text-align: center; }
 .footer-links { justify-content: center; flex-wrap: wrap; }
+
+@media (min-width: 901px) {
+  .chapter-description,
+  .story-paragraphs,
+  .story-paragraphs p,
+  .chapter-narrative,
+  .chapter-note,
+  .editorial-story-detail,
+  .story-example p,
+  .story-chapter .glass-card .card-body,
+  .story-chapter .timeline-desc,
+  .story-chapter .epilogue-text,
+  .story-chapter .choice-note,
+  .story-chapter .editorial-note p,
+  .story-chapter .matching-grid p,
+  .story-chapter .origin-map-caption,
+  .footer-copyright,
+  .hero-subtitle {
+    text-align: left;
+  }
+
+  .chapter-description { max-width: 64ch; }
+  .chapter-narrative { max-width: 68ch; }
+  .story-chapter .glass-card .card-body { max-width: 42ch; }
+  .story-chapter .timeline-desc { max-width: 68ch; }
+  .story-chapter .epilogue-text { max-width: 68ch; margin-left: 0; margin-right: 0; }
+  .story-chapter .choice-note { max-width: 68ch; margin-left: 0; margin-right: 0; }
+}
 
 @media (max-width: 900px) {
   .audience-grid,
@@ -2250,11 +2311,13 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #evolution .team-pillars > :nth-child(1).story-entry-visible { animation-delay: 80ms; }
 #evolution .team-pillars > :nth-child(2).story-entry-visible { animation-delay: 170ms; }
 #evolution .team-pillars > :nth-child(3).story-entry-visible { animation-delay: 260ms; }
-#evolution .journey-heading.story-entry-visible { animation-delay: 120ms; }
-#evolution .timeline-step:nth-child(2).story-entry-visible { animation-delay: 80ms; }
-#evolution .timeline-step:nth-child(3).story-entry-visible { animation-delay: 170ms; }
-#evolution .timeline-step:nth-child(4).story-entry-visible { animation-delay: 260ms; }
-#evolution .chapter-note.story-entry-visible { animation-delay: 160ms; }
+#journey .chapter-header [data-story-reveal].story-entry-visible { animation-delay: 40ms; }
+#journey .chapter-header h2.story-entry-visible { animation-delay: 130ms; }
+#journey .chapter-header p.story-entry-visible { animation-delay: 220ms; }
+#journey .timeline-step:nth-child(2).story-entry-visible { animation-delay: 80ms; }
+#journey .timeline-step:nth-child(3).story-entry-visible { animation-delay: 170ms; }
+#journey .timeline-step:nth-child(4).story-entry-visible { animation-delay: 260ms; }
+#journey .chapter-note.story-entry-visible { animation-delay: 160ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .story-chapter [data-story-reveal].story-entry-visible { animation: none; }
