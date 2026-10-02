@@ -2179,6 +2179,11 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 .footer-links { justify-content: center; flex-wrap: wrap; }
 
 @media (min-width: 901px) {
+  .epilogue-title-keep {
+    display: block;
+    white-space: nowrap;
+  }
+
   .chapter-description,
   .story-paragraphs,
   .story-paragraphs p,
