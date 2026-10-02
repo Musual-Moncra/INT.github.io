@@ -16,11 +16,15 @@
 
   <!-- Main Stylesheet -->
   <script>
-    document.documentElement.dataset.theme = 'light';
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('int-theme') === 'dark' ? 'dark' : 'light';
+    } catch (error) {
+      document.documentElement.dataset.theme = 'light';
+    }
     document.documentElement.dataset.palette = 'white';
   </script>
-  <link rel="stylesheet" href="css/style.css?v=story-14">
-  <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css?v=story-14">
+  <link rel="stylesheet" href="css/style.css?v=story-15">
+  <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css?v=story-15">
 </head>
 <body>
 
@@ -53,7 +57,13 @@
       <a href="#core">Sứ Mệnh</a>
       <a href="#evolution">Về chúng tôi</a>
     </nav>
-    <a href="#hero-3d-stage" class="nav-intro-link">Giới thiệu</a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Bật chế độ tối" aria-pressed="false" title="Bật chế độ tối">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.2A8.4 8.4 0 0 1 8.8 3.6 8.7 8.7 0 1 0 20.4 15.2Z"></path></svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+      </button>
+      <a href="#hero-3d-stage" class="nav-intro-link">Giới thiệu</a>
+    </div>
     <details class="mobile-chapter-menu">
         <summary>MENU <span aria-hidden="true">⌄</span></summary>
         <nav class="mobile-chapter-links" aria-label="Đi đến mục">
@@ -275,9 +285,9 @@
   <script src="js/vendor/lenis.min.js"></script>
 
   <!-- Application Logic -->
-  <script src="js/vendor/leaflet/leaflet.js?v=story-14"></script>
-  <script src="js/region-map.js?v=story-14"></script>
-  <script src="js/hero3d.js?v=story-14"></script>
-  <script src="js/main.js?v=story-14"></script>
+  <script src="js/vendor/leaflet/leaflet.js?v=story-15"></script>
+  <script src="js/region-map.js?v=story-15"></script>
+  <script src="js/hero3d.js?v=story-15"></script>
+  <script src="js/main.js?v=story-15"></script>
 </body>
 </html>

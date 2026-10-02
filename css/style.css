@@ -138,6 +138,14 @@ body {
   letter-spacing: -0.02em;
 }
 
+.header-actions {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.55rem;
+}
+
 .school-logo {
   display: block;
   width: clamp(118px, 12vw, 152px);
@@ -288,7 +296,8 @@ body {
 .palette-button[data-palette-choice="cream"] { --swatch: #fff7e6; }
 
 .theme-icon { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.theme-icon-moon { display: none; }
+.theme-icon-moon { display: block; }
+.theme-icon-sun { display: none; }
 .mobile-chapter-menu { display: none; }
 
 .nav-chapters a:hover,
@@ -1596,15 +1605,17 @@ body.cursor-hover .custom-cursor-ring {
 
 @media (max-width: 900px) {
   .navbar {
-    min-height: 64px;
+    min-height: 108px;
     height: auto;
     grid-template-columns: minmax(0, 1fr) auto auto;
-    grid-template-rows: 48px;
-    grid-template-areas: "brand intro menu";
+    grid-template-rows: 48px 44px;
+    grid-template-areas: "brand theme menu" ". intro .";
     justify-content: stretch;
     gap: 0.25rem 0.55rem;
     padding: 0.35rem 1rem 0.45rem;
   }
+
+  .header-actions { display: contents; }
 
   .nav-brand {
     grid-area: brand;
@@ -1622,13 +1633,15 @@ body.cursor-hover .custom-cursor-ring {
     max-height: 48px;
   }
 
-  :root { --header-offset: 72px; }
+  :root { --header-offset: 116px; }
   .nav-chapters { display: none; }
+  .theme-toggle { grid-area: theme; }
   .nav-intro-link {
     grid-area: intro;
     min-height: 44px;
     padding: 0 0.55rem;
     font-size: 0.68rem;
+    justify-self: center;
   }
 
   .mobile-chapter-menu {
@@ -1749,8 +1762,8 @@ body.cursor-hover .custom-cursor-ring {
 .school-logo-dark { display: none; }
 :root[data-theme="dark"] .school-logo-light { display: none; }
 :root[data-theme="dark"] .school-logo-dark { display: block; }
-:root[data-theme="dark"] .theme-icon-sun { display: none; }
-:root[data-theme="dark"] .theme-icon-moon { display: block; }
+:root[data-theme="dark"] .theme-icon-sun { display: block; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }
 
 .hero-title {
   background: linear-gradient(180deg, var(--hero-title-top) 22%, var(--hero-title-bottom) 100%);

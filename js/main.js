@@ -7,6 +7,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+
   // 1. Initialize Lenis Smooth Scroll
   let lenis = null;
   if (window.Lenis) {
@@ -76,6 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. Template Guide Drawer Modal
   initGuideModal();
 });
+
+/** Keep the white palette while letting visitors switch and remember theme. */
+function initThemeToggle() {
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  const syncControl = () => {
+    const isDark = root.dataset.theme === 'dark';
+    const label = isDark ? 'Bật chế độ sáng' : 'Bật chế độ tối';
+    toggle.setAttribute('aria-pressed', String(isDark));
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
+  };
+
+  syncControl();
+  toggle.addEventListener('click', () => {
+    const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = nextTheme;
+    root.dataset.palette = 'white';
+    syncControl();
+    try {
+      localStorage.setItem('int-theme', nextTheme);
+    } catch (error) {
+      // Theme switching still works for this page when storage is unavailable.
+    }
+  });
+}
 
 /**
  * Lightweight, one-time entrance animation for the story chapters.
