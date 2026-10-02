@@ -2226,6 +2226,26 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #challenge .challenge-question,
 #challenge .story-turn { text-align: center; }
 
+#core .editorial-note {
+  gap: 0.7rem;
+  text-align: center;
+}
+
+#core .editorial-note .note-kicker,
+#core .editorial-note p { text-align: center; }
+
+#core .editorial-note-slogan {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--gold-text);
+  text-wrap: balance;
+}
+
+#core .editorial-note-slogan strong { color: inherit; }
+#core .editorial-note-copy { max-width: 68ch; margin-inline: auto; }
+
 #challenge .challenge-question {
   margin: 0 auto clamp(1.75rem, 3.5vw, 2.5rem);
   padding-inline: 1rem;
