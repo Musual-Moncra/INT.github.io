@@ -2314,6 +2314,49 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
   box-shadow: 0 12px 28px rgba(52, 39, 16, 0.12);
 }
 
+.footer-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 1.5rem;
+}
+
+.footer-logos {
+  width: min(100%, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+}
+
+.footer-logo {
+  display: block;
+  flex: 0 1 auto;
+  max-height: 82px;
+  object-fit: contain;
+}
+
+.footer-school-logo { width: clamp(8rem, 18vw, 9.5rem); height: 75px; }
+.footer-event-logo { width: clamp(6.5rem, 15vw, 8rem); height: 82px; }
+.footer-project-logo {
+  width: 112px;
+  height: 72px;
+  padding: 3px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: #ffffff;
+}
+.footer-school-logo-dark { display: none; }
+:root[data-theme="dark"] .footer-school-logo-light { display: none; }
+:root[data-theme="dark"] .footer-school-logo-dark { display: block; }
+
+@media (max-width: 540px) {
+  .footer-logos { gap: 0.65rem; }
+  .footer-school-logo { width: clamp(5rem, 25vw, 6.2rem); height: 58px; }
+  .footer-event-logo { width: clamp(5rem, 25vw, 6.2rem); height: 62px; }
+  .footer-project-logo { width: clamp(3.8rem, 19vw, 4.7rem); height: clamp(3.8rem, 19vw, 4.7rem); }
+}
+
 @media (max-width: 900px) {
   .audience-grid,
   .matching-grid {
