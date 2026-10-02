@@ -2237,6 +2237,25 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #challenge .chapter-narrative { margin-top: 0; }
 #origins .origin-map-caption { text-align: center; }
 #core .mission-description-ending { display: block; }
+#core .mission-story-turn-followup { display: block; }
+
+@media (min-width: 960px) {
+  #challenge .chapter-narrative { max-width: min(100%, 1000px); }
+  #challenge .chapter-narrative > p:not(.story-turn) {
+    max-width: 68ch;
+    margin-inline: auto;
+  }
+  #challenge .story-turn {
+    white-space: nowrap;
+    font-size: clamp(0.82rem, 1.05vw, 1rem);
+  }
+  #core .chapter-narrative { max-width: min(100%, 900px); }
+  #core .chapter-narrative > p:not(.story-turn) {
+    max-width: 68ch;
+    margin-inline: auto;
+  }
+  #core .mission-story-turn-followup { white-space: nowrap; }
+}
 
 @media (min-width: 700px) {
   #challenge .challenge-question-followup { white-space: nowrap; }
