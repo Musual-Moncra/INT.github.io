@@ -2218,6 +2218,9 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 }
 
 #core .chapter-description,
+#core .story-turn,
+#epilogue .story-turn,
+#challenge .challenge-question,
 #challenge .story-turn { text-align: center; }
 
 @media (max-width: 900px) {
