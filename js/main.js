@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
   }
 
-  // 3a. Reveal the revised project introduction as it enters view.
-  initProjectEntryAnimations();
+  // 3a. Reveal the story chapters as they enter view.
+  initStoryEntryAnimations();
 
   // 4. Top Scroll Progress Bar
   const progressBar = document.getElementById('scroll-progress-bar');
@@ -78,19 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Lightweight, one-time entrance animation for the project introduction.
+ * Lightweight, one-time entrance animation for the story chapters.
  * Content remains visible by default; unsupported browsers and reduced-motion
  * preferences simply skip the animation.
  */
-function initProjectEntryAnimations() {
-  const elements = document.querySelectorAll('#origins [data-project-reveal]');
+function initStoryEntryAnimations() {
+  const elements = document.querySelectorAll('.story-chapter [data-story-reveal]');
   if (!elements.length || !('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const observer = new IntersectionObserver((entries, activeObserver) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('project-entry-visible');
+      entry.target.classList.add('story-entry-visible');
       activeObserver.unobserve(entry.target);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
