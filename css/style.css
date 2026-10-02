@@ -973,12 +973,23 @@ body {
   width: fit-content;
   margin: 1.1rem auto 0;
   position: relative;
-  left: clamp(-2rem, -4vw, -1rem);
+  left: clamp(2rem, 7vw, 4.5rem);
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .poem-quote-box cite { font-style: italic; }
+
+@media (max-width: 600px) {
+  .poem-quote-box figcaption {
+    max-width: calc(100% - 1.5rem);
+    left: clamp(1rem, 6vw, 1.5rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .poem-quote-box figcaption { left: 0.5rem; }
+}
 
 .story-paragraphs,
 .chapter-narrative,
