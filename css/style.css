@@ -1350,7 +1350,6 @@ body {
   line-height: 1.6;
 }
 
-#journey,
 #evolution { scroll-margin-top: var(--header-offset); }
 #epilogue { scroll-margin-top: var(--header-offset); }
 
@@ -2218,8 +2217,6 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 }
 
 #core .chapter-description,
-#journey .chapter-description,
-#journey .chapter-note,
 #epilogue .epilogue-text,
 #core .story-turn,
 #epilogue .story-turn,
@@ -2433,14 +2430,6 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #evolution .team-pillars > :nth-child(1).story-entry-visible { animation-delay: 80ms; }
 #evolution .team-pillars > :nth-child(2).story-entry-visible { animation-delay: 170ms; }
 #evolution .team-pillars > :nth-child(3).story-entry-visible { animation-delay: 260ms; }
-#journey .chapter-header [data-story-reveal].story-entry-visible { animation-delay: 40ms; }
-#journey .chapter-header h2.story-entry-visible { animation-delay: 130ms; }
-#journey .chapter-header p.story-entry-visible { animation-delay: 220ms; }
-#journey .timeline-step:nth-child(2).story-entry-visible { animation-delay: 80ms; }
-#journey .timeline-step:nth-child(3).story-entry-visible { animation-delay: 170ms; }
-#journey .timeline-step:nth-child(4).story-entry-visible { animation-delay: 260ms; }
-#journey .chapter-note.story-entry-visible { animation-delay: 160ms; }
-
 @media (prefers-reduced-motion: reduce) {
   .story-chapter [data-story-reveal].story-entry-visible { animation: none; }
 }
