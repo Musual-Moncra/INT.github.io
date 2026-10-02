@@ -1829,6 +1829,94 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
   line-height: 1.7;
 }
 
+/* Center the complete story flow, including cards, notes, metrics and timeline. */
+.story-chapter {
+  text-align: center;
+}
+
+.chapter-header,
+.chapter-description,
+.story-paragraphs,
+.chapter-narrative,
+.chapter-note,
+.editorial-story-detail,
+.story-example p,
+.audience-heading h3 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.story-chapter .editorial-grid,
+.story-chapter .cards-grid-3,
+.story-chapter .audience-grid,
+.story-chapter .matching-grid {
+  justify-items: stretch;
+  text-align: center;
+}
+
+.story-chapter .glass-card,
+.story-chapter .editorial-quote-block,
+.story-chapter .timeline-content-card,
+.story-chapter .matching-grid li,
+.story-chapter .story-example,
+.story-chapter .editorial-note,
+.story-chapter .metric-item,
+.story-chapter .audience-heading {
+  text-align: center;
+}
+
+.story-chapter .editorial-quote-author,
+.story-chapter .timeline-meta,
+.story-chapter .timeline-targets {
+  justify-content: center;
+}
+
+.story-chapter .editorial-quote-author { flex-wrap: wrap; }
+.story-chapter .author-meta { text-align: center; }
+.story-chapter .story-lead::first-letter { float: none; margin: 0; }
+
+.story-chapter .story-turn {
+  border-left: 0;
+  border-top: 2px solid var(--accent-cyan);
+}
+
+.story-chapter .editorial-note {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  border-left: 0;
+  border-top: 3px solid #e5ad35;
+}
+
+.story-chapter .editorial-note p { margin: 0; }
+
+.story-chapter .timeline-track {
+  max-width: 920px;
+  margin: 2rem auto 0;
+  padding: 1.5rem 0 0;
+}
+
+.story-chapter .timeline-line {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.story-chapter .timeline-step { padding-top: 0.75rem; }
+
+.story-chapter .timeline-pin {
+  left: 50%;
+  top: -1.45rem;
+  transform: translateX(-50%);
+}
+
+.footer-content {
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-copyright { max-width: 760px; text-align: center; }
+.footer-links { justify-content: center; flex-wrap: wrap; }
+
 @media (max-width: 900px) {
   .audience-grid,
   .matching-grid {
