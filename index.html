@@ -19,7 +19,8 @@
     document.documentElement.dataset.theme = 'light';
     document.documentElement.dataset.palette = 'white';
   </script>
-  <link rel="stylesheet" href="css/style.css?v=story-10">
+  <link rel="stylesheet" href="css/style.css?v=story-11">
+  <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css?v=story-11">
 </head>
 <body>
 
@@ -52,6 +53,7 @@
       <a href="#core">Sứ Mệnh</a>
       <a href="#evolution">Về chúng tôi</a>
     </nav>
+    <a href="#hero-3d-stage" class="nav-intro-link">Giới thiệu</a>
     <details class="mobile-chapter-menu">
         <summary>MENU <span aria-hidden="true">⌄</span></summary>
         <nav class="mobile-chapter-links" aria-label="Đi đến mục">
@@ -59,6 +61,7 @@
           <a href="#challenge">Câu Chuyện</a>
           <a href="#core">Sứ Mệnh</a>
           <a href="#evolution">Về chúng tôi</a>
+          <a href="#hero-3d-stage">Giới thiệu</a>
         </nav>
     </details>
   </header>
@@ -83,28 +86,17 @@
       <div class="hero-3d-stage" id="hero-3d-stage" aria-label="Biểu trưng 3D của dự án">
         <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
 
-        <ol class="logo-orbit-words" aria-label="Phú Hòa Đông, Cơ hội, Di sản, Mở lối">
+        <ol class="logo-orbit-words" aria-label="Phú Hòa Đông, Cơ hội, Mở lối, Di sản">
           <li>Phú Hòa Đông</li>
           <li>Cơ hội</li>
-          <li>Di Sản</li>
           <li>Mở lối</li>
+          <li>Di Sản</li>
         </ol>
 
         <!-- Orbital HUD Overlay -->
-        <div class="hero-stage-hud">
-          <div class="hud-top">
-            <span class="hud-coordinate" id="hud-coords">PHÚ HÒA ĐÔNG · CỦ CHI</span>
-            <span class="hud-interactive-badge">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              TỰ XOAY · KÉO ĐỂ XOAY TAY
-            </span>
-          </div>
-        </div>
+        <div class="hero-stage-hud" aria-hidden="true"></div>
       </div>
+      <p class="hero-rotation-hint">⟳ Tự xoay · Kéo biểu trưng để xoay bằng tay</p>
 
       <!-- CTA Buttons -->
       <div class="hero-cta-group">
@@ -114,9 +106,6 @@
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
-        <a href="#hero-3d-stage" class="btn-outline">
-          <span>Giới thiệu</span>
         </a>
       </div>
 
@@ -159,17 +148,7 @@
           <div class="chapter-badge">// ĐỊA ĐIỂM · PHÚ HÒA ĐÔNG</div>
           <h3 class="origin-map-title" id="origin-map-title">Nơi câu chuyện bắt đầu</h3>
           <p class="origin-map-caption">Vùng làng nghề bánh tráng Phú Hòa Đông, Củ Chi</p>
-          <div class="origin-map-frame">
-            <iframe
-              title="Bản đồ khu vực làng bánh tráng Phú Hòa Đông, Củ Chi"
-              src="https://maps.google.com/maps?q=11.0309829,106.565394&z=17&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen>
-            </iframe>
-            <div class="map-region-highlight" aria-hidden="true"><span></span></div>
-            <div class="map-region-label" aria-hidden="true">PHÚ HÒA ĐÔNG · CỦ CHI</div>
-          </div>
+          <div class="origin-map-frame" id="origin-leaflet-map" role="application" aria-label="Bản đồ tương tác khu vực làng bánh tráng Phú Hòa Đông, có thể kéo và phóng to trong giới hạn khu vực"></div>
           <a class="map-directions-link" href="https://www.google.com/maps/place/L%C3%A0ng+B%C3%A1nh+Tr%C3%A1ng+C%E1%BB%A7+Chi/@11.0279561,106.5648535,15.78z/data=!4m7!3m6!1s0x3174d3a0c53bd2b7:0xe5e4b449f9da688a!4b1!8m2!3d11.0309829!4d106.565394!16s%2Fg%2F11fd69_65q!18m1!1e1" target="_blank" rel="noopener noreferrer">Mở vị trí trên Google Maps ↗</a>
         </section>
       </section>
@@ -321,7 +300,9 @@
   <script src="js/vendor/lenis.min.js"></script>
 
   <!-- Application Logic -->
-  <script src="js/hero3d.js?v=story-10"></script>
-  <script src="js/main.js?v=story-10"></script>
+  <script src="js/vendor/leaflet/leaflet.js?v=story-11"></script>
+  <script src="js/region-map.js?v=story-11"></script>
+  <script src="js/hero3d.js?v=story-11"></script>
+  <script src="js/main.js?v=story-11"></script>
 </body>
 </html>

@@ -113,7 +113,7 @@ body {
   width: 100%;
   min-height: var(--nav-height);
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(1rem, 3vw, 3rem);
@@ -191,6 +191,27 @@ body {
 }
 
 .nav-controls { display: contents; }
+
+.nav-intro-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(23, 99, 61, 0.25);
+  border-radius: 999px;
+  background: #f0f6f1;
+  color: #1b5638;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-intro-link:hover,
+.nav-intro-link:focus-visible { background: #e3f0e6; border-color: #17633d; }
+.nav-intro-link:focus-visible { outline: 3px solid #17633d; outline-offset: 3px; }
 
 .mobile-chapter-menu {
   display: none;
@@ -580,10 +601,18 @@ body {
   animation: orbit-word-emphasis 8s ease-in-out infinite;
 }
 
-.logo-orbit-words li:nth-child(1) { top: 7%; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
-.logo-orbit-words li:nth-child(2) { top: 50%; right: 2%; transform: translateY(-50%); animation-delay: 2s; }
-.logo-orbit-words li:nth-child(3) { bottom: 7%; left: 50%; transform: translateX(-50%); animation-delay: 4s; }
-.logo-orbit-words li:nth-child(4) { top: 50%; left: 2%; transform: translateY(-50%); animation-delay: 6s; }
+.logo-orbit-words li:nth-child(1) { top: 1.2rem; left: 1.2rem; animation-delay: 0s; }
+.logo-orbit-words li:nth-child(2) { top: 1.2rem; right: 1.2rem; animation-delay: 2s; }
+.logo-orbit-words li:nth-child(3) { bottom: 1.2rem; right: 1.2rem; animation-delay: 4s; }
+.logo-orbit-words li:nth-child(4) { bottom: 1.2rem; left: 1.2rem; animation-delay: 6s; }
+
+.hero-rotation-hint {
+  margin: -0.5rem auto 0.9rem;
+  color: var(--text-muted);
+  font: 600 0.72rem var(--font-heading);
+  letter-spacing: 0.045em;
+  text-align: center;
+}
 
 @keyframes orbit-word-emphasis {
   0%, 22%, 100% { border-color: var(--border-subtle); box-shadow: 0 5px 22px rgba(20, 65, 41, 0.09); }
@@ -620,29 +649,25 @@ body {
   isolation: isolate;
 }
 
-.origin-map-frame iframe {
-  position: absolute;
-  inset: 0;
+.origin-map-frame.leaflet-container {
   width: 100%;
   height: 100%;
-  border: 0;
+  color: #173b2c;
+  font-family: var(--font-body);
+  background: #edf2ee;
 }
 
-.map-region-highlight {
+.map-pulse-icon { border: 0; background: transparent; }
+.map-pulse-ring {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 126px;
-  height: 126px;
-  transform: translate(-50%, -50%);
-  border: 2px solid #138249;
+  inset: 0;
+  border: 2px solid rgba(19, 130, 73, 0.8);
   border-radius: 50%;
   background: rgba(44, 171, 94, 0.12);
   box-shadow: 0 0 0 5px rgba(31, 141, 75, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-  pointer-events: none;
 }
 
-.map-region-highlight::before {
+.map-pulse-ring::before {
   content: "";
   position: absolute;
   inset: -2px;
@@ -651,7 +676,7 @@ body {
   animation: map-area-pulse 2.6s ease-out infinite;
 }
 
-.map-region-highlight span {
+.map-pulse-ring i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -669,20 +694,14 @@ body {
   to { transform: scale(1.55); opacity: 0; }
 }
 
-.map-region-label {
-  position: absolute;
-  left: 50%;
-  bottom: 1rem;
-  transform: translateX(-50%);
-  padding: 0.5rem 0.8rem;
-  border: 1px solid rgba(23, 99, 61, 0.16);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
-  color: #1b5638;
-  font: 700 0.68rem var(--font-heading);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-  pointer-events: none;
+.leaflet-control-zoom a {
+  color: #17633d !important;
+  background: #fff !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 0.63rem !important;
+  background: rgba(255, 255, 255, 0.9) !important;
 }
 
 .map-directions-link {
@@ -1579,9 +1598,9 @@ body.cursor-hover .custom-cursor-ring {
   .navbar {
     min-height: 64px;
     height: auto;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
     grid-template-rows: 48px;
-    grid-template-areas: "brand menu";
+    grid-template-areas: "brand intro menu";
     justify-content: stretch;
     gap: 0.25rem 0.55rem;
     padding: 0.35rem 1rem 0.45rem;
@@ -1593,19 +1612,24 @@ body.cursor-hover .custom-cursor-ring {
   }
 
   .school-logo {
-    width: clamp(88px, 28vw, 116px);
+    width: clamp(78px, 24vw, 100px);
     max-height: 58px;
   }
 
-  .nav-brand { gap: 0.45rem; }
+  .nav-brand { gap: 0.3rem; }
   .event-logo {
-    width: clamp(56px, 18vw, 76px);
+    width: clamp(48px, 15vw, 64px);
     max-height: 48px;
   }
 
-.nav-controls { display: contents; }
   :root { --header-offset: 72px; }
   .nav-chapters { display: none; }
+  .nav-intro-link {
+    grid-area: intro;
+    min-height: 44px;
+    padding: 0 0.55rem;
+    font-size: 0.68rem;
+  }
 
   .mobile-chapter-menu {
     grid-area: menu;
@@ -1787,7 +1811,7 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 
   .logo-orbit-words li { animation: none; }
   .logo-orbit-words li:first-child { border-color: #17633d; }
-  .map-region-highlight::before { animation: none; opacity: 0.35; transform: scale(1.35); }
+  .map-pulse-ring::before { animation: none; opacity: 0.35; transform: scale(1.35); }
 }
 
 @media (max-width: 380px) {
@@ -2106,10 +2130,10 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
     font-size: 0.62rem;
   }
 
-  .logo-orbit-words li:nth-child(1) { top: 8%; }
-  .logo-orbit-words li:nth-child(2) { right: 0; }
-  .logo-orbit-words li:nth-child(3) { bottom: 8%; }
-  .logo-orbit-words li:nth-child(4) { left: 0; }
+  .logo-orbit-words li:nth-child(1) { top: 0.7rem; left: 0.7rem; }
+  .logo-orbit-words li:nth-child(2) { top: 0.7rem; right: 0.7rem; }
+  .logo-orbit-words li:nth-child(3) { bottom: 0.7rem; right: 0.7rem; }
+  .logo-orbit-words li:nth-child(4) { bottom: 0.7rem; left: 0.7rem; }
 
   .origin-map-frame {
     min-height: 230px;
@@ -2117,5 +2141,6 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
     border-radius: 16px;
   }
 
-  .map-region-highlight { width: 112px; height: 112px; }
 }
+
+#hero-3d-stage { scroll-margin-top: var(--header-offset); }
