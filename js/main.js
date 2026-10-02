@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
   }
 
+  // 3a. Reveal the revised project introduction as it enters view.
+  initProjectEntryAnimations();
+
   // 4. Top Scroll Progress Bar
   const progressBar = document.getElementById('scroll-progress-bar');
   window.addEventListener('scroll', () => {
@@ -73,6 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. Template Guide Drawer Modal
   initGuideModal();
 });
+
+/**
+ * Lightweight, one-time entrance animation for the project introduction.
+ * Content remains visible by default; unsupported browsers and reduced-motion
+ * preferences simply skip the animation.
+ */
+function initProjectEntryAnimations() {
+  const elements = document.querySelectorAll('#origins [data-project-reveal]');
+  if (!elements.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver((entries, activeObserver) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('project-entry-visible');
+      activeObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+  elements.forEach((element) => observer.observe(element));
+}
 
 /**
  * Scroll Animations using GSAP

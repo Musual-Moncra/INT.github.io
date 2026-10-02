@@ -2144,3 +2144,43 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 }
 
 #hero-3d-stage { scroll-margin-top: var(--header-offset); }
+
+#origins .chapter-title {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+
+#origins .project-lead {
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+@keyframes project-entry-rise {
+  from { opacity: 0; transform: translateY(22px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+#origins [data-project-reveal].project-entry-visible {
+  animation: project-entry-rise 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+#origins .chapter-header [data-project-reveal].project-entry-visible { animation-delay: 40ms; }
+#origins .chapter-header h2.project-entry-visible { animation-delay: 130ms; }
+#origins .chapter-header p.project-entry-visible { animation-delay: 220ms; }
+#origins .project-copy > p:nth-child(2).project-entry-visible { animation-delay: 70ms; }
+#origins .project-copy > p:nth-child(3).project-entry-visible { animation-delay: 140ms; }
+#origins .project-copy > p:nth-child(4).project-entry-visible { animation-delay: 210ms; }
+#origins .project-copy > p:nth-child(5).project-entry-visible { animation-delay: 280ms; }
+#origins .project-copy > p:nth-child(6).project-entry-visible { animation-delay: 350ms; }
+#origins .project-copy > p:nth-child(1).project-entry-visible { animation-delay: 0ms; }
+#origins .editorial-quote-block.project-entry-visible { animation-delay: 180ms; }
+#origins .origin-map-section.project-entry-visible { animation-delay: 80ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  #origins [data-project-reveal].project-entry-visible { animation: none; }
+}
