@@ -67,9 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Chapter Active State Tracker
   initChapterTracker(lenis);
 
-  // 6.5. Persistent appearance controls
-  initAppearanceControls();
-
   // 7. Ambient Audio Synthesizer
   initAmbientSound();
 
@@ -173,45 +170,6 @@ function initChapterTracker(lenis = null) {
       if (mobileMenu?.contains(this)) mobileMenu.open = false;
     });
   });
-}
-
-/**
- * Palette and light/dark controls with graceful storage fallback.
- */
-function initAppearanceControls() {
-  const root = document.documentElement;
-  const paletteButtons = document.querySelectorAll('[data-palette-choice]');
-  const themeButton = document.querySelector('.theme-toggle');
-  let theme = root.dataset.theme === 'dark' ? 'dark' : 'light';
-  let palette = ['white', 'green', 'cream'].includes(root.dataset.palette) ? root.dataset.palette : 'white';
-
-  function applyAppearance(save = true) {
-    root.dataset.theme = theme;
-    root.dataset.palette = palette;
-    const nextMode = theme === 'dark' ? 'sáng' : 'tối';
-    themeButton?.setAttribute('aria-label', `Chuyển sang chế độ ${nextMode}`);
-    themeButton?.setAttribute('title', `Chuyển sang chế độ ${nextMode}`);
-    themeButton?.setAttribute('aria-pressed', String(theme === 'dark'));
-    paletteButtons.forEach(button => {
-      button.setAttribute('aria-pressed', String(button.dataset.paletteChoice === palette));
-    });
-    if (save) {
-      try { localStorage.setItem('int-appearance', JSON.stringify({ theme, palette })); }
-      catch (_) { /* Preferences still apply until this page is closed. */ }
-    }
-  }
-
-  paletteButtons.forEach(button => button.addEventListener('click', () => {
-    palette = button.dataset.paletteChoice;
-    applyAppearance();
-  }));
-
-  themeButton?.addEventListener('click', () => {
-    theme = theme === 'dark' ? 'light' : 'dark';
-    applyAppearance();
-  });
-
-  applyAppearance(false);
 }
 
 /**

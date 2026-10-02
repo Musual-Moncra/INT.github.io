@@ -16,18 +16,10 @@
 
   <!-- Main Stylesheet -->
   <script>
-    (() => {
-      const defaults = { theme: 'light', palette: 'white' };
-      try {
-        const saved = JSON.parse(localStorage.getItem('int-appearance') || '{}');
-        defaults.theme = ['light', 'dark'].includes(saved.theme) ? saved.theme : defaults.theme;
-        defaults.palette = ['white', 'green', 'cream'].includes(saved.palette) ? saved.palette : defaults.palette;
-      } catch (_) {}
-      document.documentElement.dataset.theme = defaults.theme;
-      document.documentElement.dataset.palette = defaults.palette;
-    })();
+    document.documentElement.dataset.theme = 'light';
+    document.documentElement.dataset.palette = 'white';
   </script>
-  <link rel="stylesheet" href="css/style.css?v=story-9">
+  <link rel="stylesheet" href="css/style.css?v=story-10">
 </head>
 <body>
 
@@ -60,17 +52,7 @@
       <a href="#core">Sứ Mệnh</a>
       <a href="#evolution">Về chúng tôi</a>
     </nav>
-    <div class="nav-controls">
-      <div class="palette-controls" role="group" aria-label="Màu nền">
-        <button class="palette-button" type="button" data-palette-choice="white" aria-label="Nền trắng" aria-pressed="false"><span></span></button>
-        <button class="palette-button" type="button" data-palette-choice="green" aria-label="Nền xanh lá" aria-pressed="false"><span></span></button>
-        <button class="palette-button" type="button" data-palette-choice="cream" aria-label="Nền vàng kem" aria-pressed="false"><span></span></button>
-      </div>
-      <button class="theme-toggle" type="button" aria-label="Chuyển sang chế độ tối" title="Chuyển sang chế độ tối">
-        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
-        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z"></path></svg>
-      </button>
-      <details class="mobile-chapter-menu">
+    <details class="mobile-chapter-menu">
         <summary>MENU <span aria-hidden="true">⌄</span></summary>
         <nav class="mobile-chapter-links" aria-label="Đi đến mục">
           <a href="#origins">Dự án</a>
@@ -78,8 +60,7 @@
           <a href="#core">Sứ Mệnh</a>
           <a href="#evolution">Về chúng tôi</a>
         </nav>
-      </details>
-    </div>
+    </details>
   </header>
 
   <main>
@@ -99,8 +80,15 @@
       <p class="hero-subtitle">HSU lửa bánh bền lâu - đậm sâu làng nghề!</p>
 
       <!-- 3D HERO CANVAS STAGE (CENTERED) -->
-      <div class="hero-3d-stage">
+      <div class="hero-3d-stage" id="hero-3d-stage" aria-label="Biểu trưng 3D của dự án">
         <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
+
+        <ol class="logo-orbit-words" aria-label="Phú Hòa Đông, Cơ hội, Di sản, Mở lối">
+          <li>Phú Hòa Đông</li>
+          <li>Cơ hội</li>
+          <li>Di Sản</li>
+          <li>Mở lối</li>
+        </ol>
 
         <!-- Orbital HUD Overlay -->
         <div class="hero-stage-hud">
@@ -115,10 +103,6 @@
               TỰ XOAY · KÉO ĐỂ XOAY TAY
             </span>
           </div>
-          <div class="hud-bottom">
-            <span>DI SẢN · KẾT NỐI · CƠ HỘI</span>
-            <span>XOAY ĐỂ KHÁM PHÁ BIỂU TRƯNG</span>
-          </div>
         </div>
       </div>
 
@@ -131,8 +115,8 @@
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </a>
-        <a href="#core" class="btn-outline">
-          <span>Khám phá những cơ hội</span>
+        <a href="#hero-3d-stage" class="btn-outline">
+          <span>Giới thiệu</span>
         </a>
       </div>
 
@@ -171,6 +155,23 @@
             <div class="editorial-quote-author"><div class="author-avatar">PHĐ</div><div class="author-meta"><h5>Một người làm nghề ở Phú Hòa Đông</h5><p>Kể về học nghề và truyền nghề</p></div></div>
           </div>
         </div>
+        <section class="origin-map-section" id="origin-map" aria-labelledby="origin-map-title">
+          <div class="chapter-badge">// ĐỊA ĐIỂM · PHÚ HÒA ĐÔNG</div>
+          <h3 class="origin-map-title" id="origin-map-title">Nơi câu chuyện bắt đầu</h3>
+          <p class="origin-map-caption">Vùng làng nghề bánh tráng Phú Hòa Đông, Củ Chi</p>
+          <div class="origin-map-frame">
+            <iframe
+              title="Bản đồ khu vực làng bánh tráng Phú Hòa Đông, Củ Chi"
+              src="https://maps.google.com/maps?q=11.0309829,106.565394&z=17&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+            <div class="map-region-highlight" aria-hidden="true"><span></span></div>
+            <div class="map-region-label" aria-hidden="true">PHÚ HÒA ĐÔNG · CỦ CHI</div>
+          </div>
+          <a class="map-directions-link" href="https://www.google.com/maps/place/L%C3%A0ng+B%C3%A1nh+Tr%C3%A1ng+C%E1%BB%A7+Chi/@11.0279561,106.5648535,15.78z/data=!4m7!3m6!1s0x3174d3a0c53bd2b7:0xe5e4b449f9da688a!4b1!8m2!3d11.0309829!4d106.565394!16s%2Fg%2F11fd69_65q!18m1!1e1" target="_blank" rel="noopener noreferrer">Mở vị trí trên Google Maps ↗</a>
+        </section>
       </section>
 
       <!-- ===================================================================
@@ -320,7 +321,7 @@
   <script src="js/vendor/lenis.min.js"></script>
 
   <!-- Application Logic -->
-  <script src="js/hero3d.js?v=story-8"></script>
-  <script src="js/main.js?v=story-8"></script>
+  <script src="js/hero3d.js?v=story-10"></script>
+  <script src="js/main.js?v=story-10"></script>
 </body>
 </html>
