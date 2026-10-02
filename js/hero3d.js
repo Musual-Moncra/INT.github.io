@@ -24,6 +24,10 @@ class Hero3D {
     this.rotationVelocity = { x: 0, y: 0 };
     this.scrollProgress = 0;
     this.time = 0;
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', event => {
+      this.reducedMotion = event.matches;
+    });
 
     this.initScene();
     this.createLights();
@@ -156,9 +160,8 @@ class Hero3D {
       canvas.width = canvas.height = size;
       const context = canvas.getContext('2d', { willReadFrequently: true });
       const cropSize = Math.min(image.naturalWidth, image.naturalHeight);
-      // The source file has a wide white margin, so centering its square crop
-      // centers the canvas instead of the emblem. Find the colored artwork
-      // bounds first, then center the crop on the emblem itself.
+      // Center the supplied emblem in its square crop. The source is 1920 ×
+      // 1080 and the seal's optical center is approximately (910, 528).
       const sourceCanvas = document.createElement('canvas');
       sourceCanvas.width = image.naturalWidth;
       sourceCanvas.height = image.naturalHeight;
@@ -189,46 +192,15 @@ class Hero3D {
       const cropY = Math.max(0, Math.min(image.naturalHeight - cropSize, artworkCenterY - cropSize / 2));
       // CircleGeometry uses direct planar UVs, so preserve the source artwork's
       // orientation. The old cylinder-cap UVs needed this quarter-turn.
+      // The source has an opaque white outer field. Clip to the seal edge by
+      // geometry, never by brightness, so its white rice-paper circles and
+      // illustration details remain intact.
+      context.save();
+      context.beginPath();
+      context.arc(size / 2, size / 2, size * 0.49, 0, Math.PI * 2);
+      context.clip();
       context.drawImage(image, cropX, cropY, cropSize, cropSize, 0, 0, size, size);
-
-      // Remove only the white background connected to the image edges. White
-      // lettering and illustration details inside the badge remain visible.
-      const imageData = context.getImageData(0, 0, size, size);
-      const pixels = imageData.data;
-      const queue = new Int32Array(size * size);
-      let queueStart = 0;
-      let queueEnd = 0;
-      const enqueueBackgroundPixel = (pixelIndex) => {
-        const i = pixelIndex * 4;
-        const r = pixels[i];
-        const g = pixels[i + 1];
-        const b = pixels[i + 2];
-        const brightest = Math.max(r, g, b);
-        const darkest = Math.min(r, g, b);
-        if (pixels[i + 3] === 0 || darkest < 232 || brightest - darkest > 28) return;
-        pixels[i + 3] = 0;
-        queue[queueEnd++] = pixelIndex;
-      };
-
-      for (let x = 0; x < size; x++) {
-        enqueueBackgroundPixel(x);
-        enqueueBackgroundPixel((size - 1) * size + x);
-      }
-      for (let y = 1; y < size - 1; y++) {
-        enqueueBackgroundPixel(y * size);
-        enqueueBackgroundPixel(y * size + size - 1);
-      }
-
-      while (queueStart < queueEnd) {
-        const pixelIndex = queue[queueStart++];
-        const x = pixelIndex % size;
-        const y = (pixelIndex - x) / size;
-        if (x > 0) enqueueBackgroundPixel(pixelIndex - 1);
-        if (x < size - 1) enqueueBackgroundPixel(pixelIndex + 1);
-        if (y > 0) enqueueBackgroundPixel(pixelIndex - size);
-        if (y < size - 1) enqueueBackgroundPixel(pixelIndex + size);
-      }
-      context.putImageData(imageData, 0, 0);
+      context.restore();
 
       const texture = new THREE.CanvasTexture(canvas);
       texture.needsUpdate = true;
@@ -441,7 +413,7 @@ class Hero3D {
 
   animate() {
     requestAnimationFrame(this.animate);
-    this.time += 0.01;
+    if (!this.reducedMotion) this.time += 0.01;
 
     // Smooth mouse lerp
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
@@ -454,32 +426,34 @@ class Hero3D {
     this.rotationVelocity.y *= 0.92;
 
     // The badge makes a full, steady turn whenever the user is not dragging.
-    if (!this.isDragging) this.meshGroup.rotation.y += 0.005;
-    this.meshGroup.rotation.x = Math.sin(this.time * 0.35) * 0.07 + (this.mouse.y * 0.2);
-    this.meshGroup.rotation.z = Math.cos(this.time * 0.4) * 0.1;
+    if (!this.isDragging && !this.reducedMotion) this.meshGroup.rotation.y += 0.005;
+    if (!this.reducedMotion) {
+      this.meshGroup.rotation.x = Math.sin(this.time * 0.35) * 0.07 + (this.mouse.y * 0.2);
+      this.meshGroup.rotation.z = Math.cos(this.time * 0.4) * 0.1;
+    }
 
     // Keep the badge and orbit rings anchored to the static HUD outline.
     // Parallax translation made the logo visibly drift away from the frame.
     this.mainGroup.position.set(0, 0, 0);
 
     // Revolving orbit rings
-    if (this.ring1) {
+    if (this.ring1 && !this.reducedMotion) {
       this.ring1.rotation.z += 0.004;
       this.ring1.rotation.y = Math.sin(this.time * 0.3) * 0.3 + 0.4;
     }
-    if (this.ring2) {
+    if (this.ring2 && !this.reducedMotion) {
       this.ring2.rotation.z -= 0.005;
       this.ring2.rotation.x = Math.cos(this.time * 0.25) * 0.3 + 0.5;
     }
 
     // Particle swirl
-    if (this.particles) {
+    if (this.particles && !this.reducedMotion) {
       this.particles.rotation.y += 0.002;
       this.particles.rotation.x = Math.sin(this.time * 0.2) * 0.1;
     }
 
     // Floating breathing effect on camera distance
-    this.camera.position.z = this.cameraDistance + Math.sin(this.time * 0.7) * 0.08 - (this.scrollProgress * 1.5);
+    this.camera.position.z = this.cameraDistance + (this.reducedMotion ? 0 : Math.sin(this.time * 0.7) * 0.08 - (this.scrollProgress * 1.5));
 
     this.renderer.render(this.scene, this.camera);
   }

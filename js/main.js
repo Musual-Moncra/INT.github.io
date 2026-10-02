@@ -65,7 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
 
   // 6. Chapter Active State Tracker
-  initChapterTracker();
+  initChapterTracker(lenis);
+
+  // 6.5. Persistent appearance controls
+  initAppearanceControls();
 
   // 7. Ambient Audio Synthesizer
   initAmbientSound();
@@ -132,36 +135,23 @@ function initCustomCursor() {
 /**
  * Chapter Active Tracker
  */
-function initChapterTracker() {
+function initChapterTracker(lenis = null) {
   const chapters = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-chapters a');
-  const sideItems = document.querySelectorAll('.side-track-item');
+  const navLinks = document.querySelectorAll('.nav-chapters a, .mobile-chapter-links a');
+  const mobileMenu = document.querySelector('.mobile-chapter-menu');
 
   function updateActive() {
     const scrollPos = window.scrollY + window.innerHeight * 0.35;
-
-    chapters.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute('id');
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-
-        sideItems.forEach(item => {
-          if (item.getAttribute('data-target') === id) {
-            item.classList.add('active');
-          } else {
-            item.classList.remove('active');
-          }
-        });
-      }
+    const activeSection = [...chapters].find(section => {
+      const id = section.id;
+      const isNavigableChapter = [...navLinks].some(link => link.getAttribute('href') === `#${id}`);
+      return isNavigableChapter && scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight;
+    });
+    navLinks.forEach(link => {
+      const active = Boolean(activeSection && link.getAttribute('href') === `#${activeSection.id}`);
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
     });
   }
 
@@ -176,10 +166,52 @@ function initChapterTracker() {
       const targetElem = document.querySelector(targetId);
       if (targetElem) {
         e.preventDefault();
-        targetElem.scrollIntoView({ behavior: 'smooth' });
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (lenis && !reduceMotion) lenis.scrollTo(targetElem, { offset: -parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-offset')) });
+        else targetElem.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
       }
+      if (mobileMenu?.contains(this)) mobileMenu.open = false;
     });
   });
+}
+
+/**
+ * Palette and light/dark controls with graceful storage fallback.
+ */
+function initAppearanceControls() {
+  const root = document.documentElement;
+  const paletteButtons = document.querySelectorAll('[data-palette-choice]');
+  const themeButton = document.querySelector('.theme-toggle');
+  let theme = root.dataset.theme === 'dark' ? 'dark' : 'light';
+  let palette = ['white', 'green', 'cream'].includes(root.dataset.palette) ? root.dataset.palette : 'white';
+
+  function applyAppearance(save = true) {
+    root.dataset.theme = theme;
+    root.dataset.palette = palette;
+    const nextMode = theme === 'dark' ? 'sáng' : 'tối';
+    themeButton?.setAttribute('aria-label', `Chuyển sang chế độ ${nextMode}`);
+    themeButton?.setAttribute('title', `Chuyển sang chế độ ${nextMode}`);
+    themeButton?.setAttribute('aria-pressed', String(theme === 'dark'));
+    paletteButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.paletteChoice === palette));
+    });
+    if (save) {
+      try { localStorage.setItem('int-appearance', JSON.stringify({ theme, palette })); }
+      catch (_) { /* Preferences still apply until this page is closed. */ }
+    }
+  }
+
+  paletteButtons.forEach(button => button.addEventListener('click', () => {
+    palette = button.dataset.paletteChoice;
+    applyAppearance();
+  }));
+
+  themeButton?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    applyAppearance();
+  });
+
+  applyAppearance(false);
 }
 
 /**

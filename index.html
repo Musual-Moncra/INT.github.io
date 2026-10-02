@@ -15,7 +15,19 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=story-6">
+  <script>
+    (() => {
+      const defaults = { theme: 'light', palette: 'white' };
+      try {
+        const saved = JSON.parse(localStorage.getItem('int-appearance') || '{}');
+        defaults.theme = ['light', 'dark'].includes(saved.theme) ? saved.theme : defaults.theme;
+        defaults.palette = ['white', 'green', 'cream'].includes(saved.palette) ? saved.palette : defaults.palette;
+      } catch (_) {}
+      document.documentElement.dataset.theme = defaults.theme;
+      document.documentElement.dataset.palette = defaults.palette;
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css?v=story-8">
 </head>
 <body>
 
@@ -35,61 +47,40 @@
        NAVIGATION BAR
        =================================================================== -->
   <header class="navbar">
-    <a href="#" class="nav-brand">
-      <span class="brand-dot"></span>
-      <span>PHÚ HÒA ĐÔNG</span>
-      <span class="brand-tag">Gen “Ziệt” mở lối</span>
+    <a href="#hero" class="nav-brand" aria-label="Đại học Hoa Sen và Sinh Viên Thế Hệ Mới 2026 — về đầu trang">
+      <img class="school-logo school-logo-light" src="assets/HSU-B-VIE.png" alt="Đại học Hoa Sen — Tôn trọng sự khác biệt" width="152" height="75">
+      <img class="school-logo school-logo-dark" src="assets/HSU-W-VIE.png" alt="Đại học Hoa Sen — Tôn trọng sự khác biệt" width="152" height="75">
+      <img class="event-logo" src="assets/Logo2.png" alt="Sinh Viên Thế Hệ Mới 2026" width="112" height="75">
     </a>
 
     <!-- Chapter Fast Links -->
-    <nav class="nav-chapters">
-      <li><a href="#hero"><span class="chapter-num">00</span> Mở đầu</a></li>
-      <li><a href="#origins"><span class="chapter-num">01</span> Câu chuyện</a></li>
-      <li><a href="#challenge"><span class="chapter-num">02</span> Khoảng cách</a></li>
-      <li><a href="#core"><span class="chapter-num">03</span> Cơ hội</a></li>
-      <li><a href="#evolution"><span class="chapter-num">04</span> Lộ trình</a></li>
-      <li><a href="#epilogue"><span class="chapter-num">05</span> Mở lối</a></li>
+    <nav class="nav-chapters" aria-label="Các mục nội dung">
+      <a href="#origins">Dự án</a>
+      <a href="#challenge">Câu Chuyện</a>
+      <a href="#core">Sứ Mệnh</a>
+      <a href="#evolution">Về chúng tôi</a>
     </nav>
-    <details class="mobile-chapter-menu">
-      <summary>CHƯƠNG <span aria-hidden="true">⌄</span></summary>
-      <nav class="mobile-chapter-links" aria-label="Đi đến chương">
-        <a href="#hero">00 · Mở đầu</a>
-        <a href="#origins">01 · Câu chuyện</a>
-        <a href="#challenge">02 · Khoảng cách</a>
-        <a href="#core">03 · Cơ hội</a>
-        <a href="#evolution">04 · Lộ trình</a>
-        <a href="#epilogue">05 · Mở lối</a>
-      </nav>
-    </details>
+    <div class="nav-controls">
+      <div class="palette-controls" role="group" aria-label="Màu nền">
+        <button class="palette-button" type="button" data-palette-choice="white" aria-label="Nền trắng" aria-pressed="false"><span></span></button>
+        <button class="palette-button" type="button" data-palette-choice="green" aria-label="Nền xanh lá" aria-pressed="false"><span></span></button>
+        <button class="palette-button" type="button" data-palette-choice="cream" aria-label="Nền vàng kem" aria-pressed="false"><span></span></button>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Chuyển sang chế độ tối" title="Chuyển sang chế độ tối">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z"></path></svg>
+      </button>
+      <details class="mobile-chapter-menu">
+        <summary>MENU <span aria-hidden="true">⌄</span></summary>
+        <nav class="mobile-chapter-links" aria-label="Đi đến mục">
+          <a href="#origins">Dự án</a>
+          <a href="#challenge">Câu Chuyện</a>
+          <a href="#core">Sứ Mệnh</a>
+          <a href="#evolution">Về chúng tôi</a>
+        </nav>
+      </details>
+    </div>
   </header>
-
-  <!-- Fixed Side Chapter Tracker (Desktop) -->
-  <aside class="side-tracker" aria-hidden="true">
-    <a class="side-track-item active" data-target="hero" href="#hero">
-      <div class="track-dot"></div>
-      <span class="track-label">00 // Mở đầu</span>
-    </a>
-    <a class="side-track-item" data-target="origins" href="#origins">
-      <div class="track-dot"></div>
-      <span class="track-label">01 // Gốc rễ</span>
-    </a>
-    <a class="side-track-item" data-target="challenge" href="#challenge">
-      <div class="track-dot"></div>
-      <span class="track-label">02 // Khoảng cách</span>
-    </a>
-    <a class="side-track-item" data-target="core" href="#core">
-      <div class="track-dot"></div>
-      <span class="track-label">03 // Cơ hội</span>
-    </a>
-    <a class="side-track-item" data-target="evolution" href="#evolution">
-      <div class="track-dot"></div>
-      <span class="track-label">04 // Lộ trình</span>
-    </a>
-    <a class="side-track-item" data-target="epilogue" href="#epilogue">
-      <div class="track-dot"></div>
-      <span class="track-label">05 // Tiếp nối</span>
-    </a>
-  </aside>
 
   <main>
     <!-- ===================================================================
@@ -329,7 +320,7 @@
   <script src="js/vendor/lenis.min.js"></script>
 
   <!-- Application Logic -->
-  <script src="js/hero3d.js?v=story-6"></script>
-  <script src="js/main.js?v=story-6"></script>
+  <script src="js/hero3d.js?v=story-8"></script>
+  <script src="js/main.js?v=story-8"></script>
 </body>
 </html>
