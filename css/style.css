@@ -2349,8 +2349,8 @@ html, body { background-color: var(--bg-primary); color: var(--text-primary); }
 #challenge .challenge-photo-gallery {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.55rem, 1.5vw, 0.9rem);
-  width: min(100%, 510px);
+  gap: clamp(0.65rem, 2vw, 1.5rem);
+  width: 100%;
   margin: 0 auto clamp(2.25rem, 4vw, 3.25rem);
 }
 
