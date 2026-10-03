@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3a. Reveal the story chapters as they enter view.
   initStoryEntryAnimations();
+  initVideoAutoplay();
 
   // 4. Top Scroll Progress Bar
   const progressBar = document.getElementById('scroll-progress-bar');
@@ -126,6 +127,35 @@ function initStoryEntryAnimations() {
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
   elements.forEach((element) => observer.observe(element));
+}
+
+/** Start the field video when it enters view without surprising visitors on load. */
+function initVideoAutoplay() {
+  const video = document.querySelector('.story-film video');
+  if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Muted inline playback is required for autoplay in most mobile browsers.
+  video.muted = true;
+  video.defaultMuted = true;
+
+  const playWhenVisible = () => {
+    video.play().catch(() => {
+      // Browser settings may block autoplay; native controls remain available.
+    });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    playWhenVisible();
+    return;
+  }
+
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry) return;
+    if (entry.isIntersecting) playWhenVisible();
+    else video.pause();
+  }, { threshold: 0.25 });
+
+  observer.observe(video);
 }
 
 /**
