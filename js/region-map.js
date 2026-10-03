@@ -19,11 +19,11 @@
     worldCopyJump: false
   });
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     minZoom: 15,
     maxZoom: 17,
     noWrap: true,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    attribution: 'Imagery &copy; <a href="https://www.esri.com/en-us/legal/terms/web-site-service">Esri</a>, DigitalGlobe, GeoEye, i-cubed, USDA FSA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community.'
   }).addTo(map);
 
   L.circle(center, {
