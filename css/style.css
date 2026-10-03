@@ -940,6 +940,102 @@ body {
   }
 }
 
+.story-visual {
+  width: min(100%, 1080px);
+  margin: clamp(2.5rem, 6vw, 4.75rem) auto;
+  text-align: center;
+}
+
+.story-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: clamp(14px, 2vw, 24px);
+  background: var(--bg-card);
+  box-shadow: 0 22px 58px rgba(16, 42, 28, 0.13);
+  object-fit: cover;
+}
+
+.project-aside {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.story-visual-project { width: 100%; margin: 0; }
+.story-visual-project-top img { aspect-ratio: 16 / 9; }
+.story-visual-project-bottom img { aspect-ratio: 3 / 2; }
+.story-visual-team-poster { width: min(100%, 1080px); margin-top: 0; }
+.story-visual-team-poster img { aspect-ratio: 16 / 9; object-fit: contain; }
+
+.story-visual figcaption,
+.story-film figcaption {
+  margin: 0.85rem auto 0;
+  max-width: 66ch;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.story-film {
+  width: min(100%, 1040px);
+  margin: clamp(3.5rem, 8vw, 6rem) auto 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: clamp(18px, 2.5vw, 28px);
+  background: var(--bg-card);
+  box-shadow: 0 22px 58px rgba(16, 42, 28, 0.1);
+  text-align: center;
+}
+
+#core > .story-film {
+  margin: clamp(1.5rem, 3vw, 2.5rem) auto clamp(3rem, 6vw, 5rem);
+}
+
+.story-film-heading {
+  max-width: 68ch;
+  margin: 0 auto clamp(1.25rem, 3vw, 2rem);
+}
+
+.story-film-heading .chapter-badge { margin-bottom: 0.65rem; }
+
+.story-film-heading h3 {
+  margin: 0 0 0.65rem;
+  color: var(--text-primary);
+  font: 700 clamp(1.45rem, 3vw, 2.2rem)/1.2 var(--font-heading);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.story-film-heading p {
+  margin: 0 auto;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.story-film video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-subtle);
+  border-radius: clamp(12px, 1.8vw, 20px);
+  background: #101413;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .story-visual { margin-block: 2rem; }
+  .story-visual-project { margin: 0; }
+  .story-visual-team-poster { margin-top: 0; }
+  .story-film { margin-top: 3rem; padding: 0.75rem; }
+  #core > .story-film { margin: 2rem auto 2.5rem; }
+  .story-film-heading .chapter-badge { font-size: 0.68rem; }
+}
+
 .editorial-quote-block {
   padding: 2.5rem;
   border-radius: 20px;
