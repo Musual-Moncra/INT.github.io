@@ -146,6 +146,31 @@ body {
   gap: 0.55rem;
 }
 
+.language-control {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.65rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-control);
+  color: var(--text-primary);
+}
+
+.language-control-icon { font-size: 1rem; line-height: 1; }
+.language-control select {
+  max-width: 112px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: 600 0.78rem var(--font-heading);
+  cursor: pointer;
+}
+.language-control select option { color: #18231c; background: #fff; }
+.language-control:focus-within { outline: 3px solid var(--accent-cyan); outline-offset: 2px; }
+
 .school-logo {
   display: block;
   width: clamp(118px, 12vw, 152px);
@@ -1775,7 +1800,7 @@ body.cursor-hover .custom-cursor-ring {
     height: auto;
     grid-template-columns: minmax(0, 1fr) auto auto;
     grid-template-rows: 48px 44px;
-    grid-template-areas: "brand theme menu" ". intro .";
+    grid-template-areas: "brand language menu" ". theme intro";
     justify-content: stretch;
     gap: 0.25rem 0.55rem;
     padding: 0.35rem 1rem 0.45rem;
@@ -1802,6 +1827,8 @@ body.cursor-hover .custom-cursor-ring {
   :root { --header-offset: 116px; }
   .nav-chapters { display: none; }
   .theme-toggle { grid-area: theme; }
+  .language-control { grid-area: language; justify-self: center; min-height: 40px; padding: 0 0.45rem; }
+  .language-control select { max-width: 96px; font-size: 0.72rem; }
   .nav-intro-link {
     grid-area: intro;
     min-height: 44px;

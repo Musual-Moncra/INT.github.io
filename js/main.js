@@ -8,6 +8,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  initLanguageSelector();
 
   // 1. Initialize Lenis Smooth Scroll
   let lenis = null;
@@ -79,6 +80,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. Template Guide Drawer Modal
   initGuideModal();
 });
+
+/** Translate the published page through Google's page translator when requested. */
+function initLanguageSelector() {
+  const selector = document.getElementById('language-select');
+  if (!selector) return;
+
+  // GitHub Pages project URL used when the site is opened from a local preview.
+  const publishedUrl = 'https://musual-moncra.github.io/INT.github.io/';
+  const currentUrl = /^https?:$/.test(window.location.protocol)
+    ? window.location.href
+    : publishedUrl;
+  const sourceUrl = currentUrl.includes('translate.google.') ? publishedUrl : currentUrl;
+  const parsedSource = new URL(sourceUrl);
+  const currentLanguage = parsedSource.searchParams.get('int_lang');
+  if (['en', 'ja', 'ko', 'zh-CN'].includes(currentLanguage)) selector.value = currentLanguage;
+  parsedSource.searchParams.delete('int_lang');
+  const originalUrl = parsedSource.href;
+
+  selector.addEventListener('change', () => {
+    const language = selector.value;
+    if (language === 'vi') {
+      window.location.assign(originalUrl);
+      return;
+    }
+
+    const translatedSource = new URL(originalUrl);
+    translatedSource.searchParams.set('int_lang', language);
+    const translatorUrl = new URL('https://translate.google.com/translate');
+    translatorUrl.searchParams.set('sl', 'vi');
+    translatorUrl.searchParams.set('tl', language);
+    translatorUrl.searchParams.set('u', translatedSource.href);
+    window.location.assign(translatorUrl.href);
+  });
+}
 
 /** Keep the white palette while letting visitors switch and remember theme. */
 function initThemeToggle() {
